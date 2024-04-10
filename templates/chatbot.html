@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My chatbot</title>
+  </head>
+  <body>
+    <h1>Chatbot</h1>
+    <form method="post" action="{{ url_for('chatbot_app.chatbot') }}">
+      <label for="message">Message:</label>
+      <input type="text" id="message" name="message" required />
+      <button type="submit">Send</button>
+    </form>
+    <div id="chat-history">
+      {% for entry in chat_history %}
+      <p><strong>{{ entry['speaker'] }}:</strong> {{ entry['message'] }}</p>
+      {% endfor %}
+    </div>
+  </body>
+</html>

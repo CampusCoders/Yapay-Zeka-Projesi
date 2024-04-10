@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login or Signup</title>
+    <style>
+      .button-container {
+        text-align: center;
+      }
+
+      .form-container {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to Eventosphere</h1>
+    <div class="button-container">
+      <button onclick="showForm('login-form')">Login</button>
+      <button onclick="showForm('signup-form')">Signup</button>
+    </div>
+
+    <div class="form-container" id="login-form" style="text-align: center">
+      <h2>Login</h2>
+      <form action="/login" method="POST">
+        <label for="login_email">Email:</label><br />
+        <input
+          type="email"
+          id="login_email"
+          name="login_email"
+          required
+        /><br />
+        <label for="login_password">Password:</label><br />
+        <input
+          type="password"
+          id="login_password"
+          name="login_password"
+          required
+        /><br /><br />
+        <input type="submit" value="Login" />
+      </form>
+    </div>
+
+    <div class="form-container" id="signup-form" style="text-align: center">
+      <h2>Signup</h2>
+      <form action="/signup" method="POST">
+        <label for="signup_username">Username:</label><br />
+        <input
+          type="text"
+          id="signup_username"
+          name="signup_username"
+          required
+        /><br />
+        <label for="signup_name">Name:</label><br />
+        <input type="text" id="signup_name" name="signup_name" required /><br />
+        <label for="signup_surname">Surname:</label><br />
+        <input
+          type="text"
+          id="signup_surname"
+          name="signup_surname"
+          required
+        /><br />
+        <label for="signup_email">Email:</label><br />
+        <input
+          type="email"
+          id="signup_email"
+          name="signup_email"
+          required
+        /><br />
+        <label for="signup_password">Password:</label><br />
+        <input
+          type="password"
+          id="signup_password"
+          name="signup_password"
+          required
+        /><br /><br />
+        <input type="submit" value="Signup" />
+      </form>
+    </div>
+
+    <script>
+      function showForm(formId) {
+        var forms = document.getElementsByClassName("form-container");
+        for (var i = 0; i < forms.length; i++) {
+          forms[i].style.display = "none";
+        }
+        document.getElementById(formId).style.display = "block";
+      }
+    </script>
+  </body>
+</html>

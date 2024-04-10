@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+  </head>
+  <body>
+    <h1>Welcome to Your Dashboard</h1>
+    <h2>User Information:</h2>
+    <p>Username: {{ user.username }}</p>
+    <p>Name: {{ user.name }}</p>
+    <p>Surname: {{ user.surname }}</p>
+    <p>Email: {{ user.email }}</p>
+
+    <form action="/reset_password" method="post">
+      <label for="new_password">Enter New Password:</label>
+      <input type="password" id="new_password" name="new_password" required />
+      <button type="submit">Reset Password</button>
+    </form>
+
+    <form action="/change_email" method="post">
+      <label for="new_email">Enter New Email:</label>
+      <input type="email" id="new_email" name="new_email" required />
+      <button type="submit">Change Email</button>
+    </form>
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+
+    <form action="/logout" method="post">
+      <button type="submit">Logout</button>
+    </form>
+  </body>
+</html>
