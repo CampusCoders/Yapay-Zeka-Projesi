@@ -6,7 +6,7 @@ import prompts
 
 _ = load_dotenv(find_dotenv())
 client = OpenAI(
-    api_key=os.environ.get('OPENAI_API_KEY')
+    api_key="sk-proj-dqioiPTKvbYHpzWgTBt4T3BlbkFJEXgajeHF9RLQ2CwBCRDo"
 )
 
 models_newer = ["gpt-3.5-turbo", "gpt-4-turbo-preview", "gpt-4"]        #endpoint -> https://api.openai.com/v1/chat/completions
@@ -54,22 +54,6 @@ def get_post(event_name, event_topic, event_purpose, target_audience, event_plat
     return completion.choices[0].message.content
 
 
-
-
-#app = Flask(__name__)
-
-#@app.route('/')
-#def home():
-#    post_content = get_post()
-#    return render_template('post.html', post_content=post_content)
-
-#if __name__ == '__main__':
-#    app.run(debug=True)
-
-
-
-
-
 # gpt-3.5-turbo max input token = 4097
 
 # List of Chat GPT Documentation
@@ -77,7 +61,6 @@ def get_post(event_name, event_topic, event_purpose, target_audience, event_plat
     # Text Generation Models -> https://platform.openai.com/docs/guides/text-generation
     # Prompt Engineering -> https://platform.openai.com/docs/guides/prompt-engineering
     # Prompt Examples -> https://platform.openai.com/examples
-
 
 # Chat completion object
 #{

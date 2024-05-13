@@ -4,7 +4,6 @@ import os
 from dotenv import load_dotenv, find_dotenv
 import interface
 
-
 app = Flask(__name__)
 
 @app.route('/')
