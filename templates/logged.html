@@ -3,7 +3,6 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="About Our Company, $ 30, $ 60, Home Repair Services, Home repair specialists, ​Feel Free To Ask Me Anything">
     <meta name="description" content="">
     <title>Logged</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="screen">
@@ -24,8 +23,8 @@
 
 
   <body data-path-to-root="./" data-include-products="false" class="u-body u-overlap u-overlap-transparent u-xl-mode" data-lang="tr">
-    <header class="u-align-center-xs u-clearfix u-header" id="sec-75b6">
-    <div class="u-clearfix u-sheet u-sheet-1">
+     <header class="u-align-center-xs u-clearfix u-header" id="sec-75b6">
+      <div class="u-clearfix u-sheet u-sheet-1">
         <img class="u-image u-image-contain u-image-default u-image-1" src="./static/images/namelogo.png" alt="" data-image-width="757" data-image-height="114">
         <nav class="u-align-right u-menu u-menu-one-level u-offcanvas u-menu-1">
           <div class="menu-collapse" style="font-weight: 700;">
@@ -35,13 +34,13 @@
             </a>
           </div>
           <div class="u-custom-menu u-nav-container">
-            <ul class="u-nav u-spacing-29 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10" href="login.html" style="--radius: 10px; padding: 10px 14px;">Giriş Yap - Üye Ol</a></li></ul>
+            <ul class="u-nav u-spacing-29 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10" href="/loginorsignup" style="--radius: 10px; padding: 10px 14px;">Giriş Yap - Üye Ol</a></li></ul>
           </div>
           <div class="u-custom-menu u-nav-container-collapse">
             <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
-                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="login.html">Giriş Yap - Üye Ol</a></li></ul>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="/loginorsignup">Giriş Yap - Üye Ol</a></li></ul>
               </div>
             </div>
             <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
@@ -49,9 +48,10 @@
         </nav>
       </div>
     </header>
+
     <section class="u-clearfix u-image u-section-1" id="carousel_6500" data-image-width="1920" data-image-height="1080">
       <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-sheet-1">
-        <a href="#" class="u-border-hover-black u-border-none u-btn u-btn-round u-button-style u-custom-color-19 u-radius u-text-black u-text-hover-black u-btn-1">Planlamaya Başla&nbsp;<span class="u-file-icon u-icon u-icon-1"><img src="./static/images/271228.png" alt=""></span>
+        <a onclick="smoothScroll('#sec-91be')" class="u-border-hover-black u-border-none u-btn u-btn-round u-button-style u-custom-color-19 u-radius u-text-black u-text-hover-black u-btn-1">Planlamaya Başla&nbsp;<span class="u-file-icon u-icon u-icon-1"><img src="./static/images/271228.png" alt=""></span>
         </a>
       </div>
     </section>
@@ -252,4 +252,31 @@
       </div>
     </footer>
   </body>
+  <script>
+    function smoothScroll(target) {
+    var targetPosition = document.querySelector(target).offsetTop;
+    var startPosition = window.pageYOffset;
+    var distance = targetPosition - startPosition;
+    var startTime = null;
+    var duration = 1000; // animasyon süresi (milisaniye cinsinden)
+
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        var timeElapsed = currentTime - startTime;
+        var run = ease(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+
+    function ease(t, b, c, d) {
+        t /= d / 2;
+        if (t < 1) return c / 2 * t * t + b;
+        t--;
+        return -c / 2 * (t * (t - 2) - 1) + b;
+    }
+
+    requestAnimationFrame(animation);
+}
+
+  </script>
 </html>
