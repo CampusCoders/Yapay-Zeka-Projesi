@@ -16,22 +16,18 @@ config = {
 }
 
 # Firebase Admin
-cred = credentials.Certificate(r"C:\Users\CAGRII\Desktop\Yapay-Zeka-Projesi\serviceAccountKey.json")
+cred = credentials.Certificate(r".\serviceAccountKey.json")
 firebase_admin.initialize_app(cred)
 
 # Pyrebase
 firebase = pyrebase.initialize_app(config)
-auth= firebase.auth()
-db=firebase.database()
+auth = firebase.auth()
+db = firebase.database()
 
 @login_or_signup.route('/loginorsignup')
 def login_or_signup_home():
-    return render_template('login.html')
-
-def get_user_data(user_id):
-    db = firebase.database()
-    user_data = db.child('users').child(user_id).get().val()
-    return user_data
+    form_type = request.args.get('form', 'login')
+    return render_template('login.html', form_type=form_type)
 
 @login_or_signup.route('/login', methods=['POST'])
 def login():
@@ -43,25 +39,29 @@ def login():
         user = auth.sign_in_with_email_and_password(email, password)
         user_id = user['localId']
         session['user_id'] = user_id
-
         return redirect(url_for('login_or_signup.logged'))
 
     except Exception as e:
-        print(e)
-        return "Login failed."
+        error_message = str(e)
+        print(f"Login failed: {error_message}")
+        flash('Giriş başarısız. Bilgilerinizi kontrol edin.', 'danger')
+        return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
 
 @login_or_signup.route('/signup', methods=['POST'])
 def register():
     name = request.form['signup_name']
     surname = request.form['signup_surname']
     email = request.form['signup_email']
-    password1 = request.form['signup_password_1']
-    password2 = request.form['signup_password_2']
-    if (password1 == password2):
-        password = password1 = password2
+    password = request.form['signup_password_1']
+    password_confirm = request.form['signup_password_2']
+    
+    if password != password_confirm:
+        flash('Şifreler eşleşmiyor.', 'danger')
+        return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
     
     if len(password) < 8:
-        return render_template('login_or_signup.html', message="Password must be at least 8 characters long.")
+        flash('Şifre en az 8 karakter olmalıdır.', 'danger')
+        return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
     
     try:
         # Firebase Authentication kullanarak kullanıcı kaydı yap
@@ -81,14 +81,19 @@ def register():
         return redirect(url_for('login_or_signup.logged'))
     
     except Exception as e:
-        print(e)
-        return "User registration failed."
-        
+        error_message = str(e)
+        print(f"Registration failed: {error_message}")
+        flash('Kullanıcı kaydı başarısız. Bu e-posta adresi zaten kullanılıyor.', 'danger')
+        return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
 
 @login_or_signup.route('/logged')
 def logged():
-    return render_template('logged.html')
-
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user_data = db.child('users').child(user_id).get().val()
+        return render_template('logged.html', user=user_data)
+    else:
+        return redirect(url_for('login_or_signup.login_or_signup_home'))
 
 @login_or_signup.route('/dashboard')
 def dashboard():
@@ -98,7 +103,7 @@ def dashboard():
         return render_template('dashboard.html', user=user_data)
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
-
+    
 @login_or_signup.route('/reset_password', methods=['POST'])
 def reset_password():
     if 'user_id' in session:
@@ -114,7 +119,7 @@ def reset_password():
             flash('Failed to change password.', 'error')
             return redirect(url_for('login_or_signup.dashboard'))
     else:
-        return redirect(url_for('riebase_app.login_or_signup_home'))
+        return redirect(url_for('login_or_signup.login_or_signup_home'))
     
 @login_or_signup.route('/change_email', methods=['POST'])
 def change_email():
@@ -133,9 +138,8 @@ def change_email():
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
 
-@login_or_signup.route('/logout', methods=['POST'])
+@login_or_signup.route('/logout')
 def logout():
     auth.current_user = None
     session.clear()
     return redirect(url_for('login_or_signup.login_or_signup_home'))
-

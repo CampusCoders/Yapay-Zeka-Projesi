@@ -1089,3 +1089,31 @@
     font-size: 3rem;
   }
 }
+
+
+
+
+
+.user-menu {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 0;
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+}
+
+.u-nav-item:hover .dropdown-menu {
+  display: block;
+}
