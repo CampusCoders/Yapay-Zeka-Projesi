@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import pyrebase
 import firebase_admin
 from firebase_admin import credentials, auth as auth2
+from datetime import datetime
 
 login_or_signup = Blueprint('login_or_signup', import_name=__name__, template_folder='templates')
 
@@ -26,8 +27,13 @@ db = firebase.database()
 
 @login_or_signup.route('/loginorsignup')
 def login_or_signup_home():
-    form_type = request.args.get('form', 'login')
-    return render_template('login.html', form_type=form_type)
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user_data = db.child('Users').child(user_id).get().val()
+        return render_template('logged.html', user=user_data)
+    else:
+       form_type = request.args.get('form', 'login')
+       return render_template('login.html', form_type=form_type)
 
 @login_or_signup.route('/login', methods=['POST'])
 def login():
@@ -35,7 +41,6 @@ def login():
     password = request.form['login_password']
 
     try:
-        # Firebase Authentication kullanarak kullanıcıyı giriş yap
         user = auth.sign_in_with_email_and_password(email, password)
         user_id = user['localId']
         session['user_id'] = user_id
@@ -64,18 +69,32 @@ def register():
         return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
     
     try:
-        # Firebase Authentication kullanarak kullanıcı kaydı yap
         user = auth.create_user_with_email_and_password(email=email, password=password)
         user_id = user['localId']
+
+        registration_date = datetime.now().strftime("%b %d, %Y at %H:%M:%S UTC+3")
         
-        # Firebase Realtime Database'e kullanıcıyı kaydet
-        data = {
+        user_data = {
             'name': name,
             'surname': surname,
             'email': email,
-            'password': password
+            'password': password,
+            'created_at': registration_date,
+            'subscription': "free"
         }
-        db.child('users').child(user_id).set(data)
+
+        sub_data = {
+            'name': name,
+            'surname': surname,
+            'email': email,
+            'sub_type': "free",
+            'expire_date': "none",
+            'sub_price': "none"
+        }
+
+        db.child('Users').child(user_id).set(user_data)
+
+        db.child('Subscriptions').child("free").child(user_id).set(sub_data)
         
         session['user_id'] = user_id
         return redirect(url_for('login_or_signup.logged'))
@@ -90,7 +109,7 @@ def register():
 def logged():
     if 'user_id' in session:
         user_id = session['user_id']
-        user_data = db.child('users').child(user_id).get().val()
+        user_data = db.child('Users').child(user_id).get().val()
         return render_template('logged.html', user=user_data)
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
@@ -99,7 +118,7 @@ def logged():
 def dashboard():
     if 'user_id' in session:
         user_id = session['user_id']
-        user_data = db.child('users').child(user_id).get().val()
+        user_data = db.child('Users').child(user_id).get().val()
         return render_template('dashboard.html', user=user_data)
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
@@ -111,7 +130,7 @@ def reset_password():
         new_password = request.form['new_password']
         try:
             user = auth2.update_user(user_id, password=new_password)
-            db.child('users').child(user_id).update({'password': new_password})
+            db.child('Users').child(user_id).update({'password': new_password})
             flash('Password successfully changed.', 'success')
             return redirect(url_for('login_or_signup.dashboard'))
         except Exception as e:
@@ -128,7 +147,7 @@ def change_email():
         new_email = request.form['new_email']
         try:
             user = auth2.update_user(user_id, email=new_email)
-            db.child('users').child(user_id).update({'email': new_email})
+            db.child('Users').child(user_id).update({'email': new_email})
             flash('Email successfully changed.', 'success')
             return redirect(url_for('login_or_signup.dashboard'))
         except Exception as e:
