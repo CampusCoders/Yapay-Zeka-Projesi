@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="tr">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="keywords" content>
+        <meta name="description" content>
+        <title>Login</title>
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
+            media="screen">
+        <link rel="stylesheet"
+            href="{{ url_for('static', filename='css/login.css') }}"
+            media="screen">
+        <link id="u-theme-google-font"
+            href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" />
+        <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": "EventoSphere"}
+    </script>
+        <meta name="theme-color" content="#89b2d8">
+        <meta property="og:title" content="login">
+        <meta property="og:type" content="website">
+        <meta data-intl-tel-input-cdn-path="intlTelInput/">
+    </head>
+    <body data-path-to-root="./" data-include-products="false"
+        class="u-body u-overlap u-overlap-contrast u-xl-mode" data-lang="tr">
+        <header class="u-align-center-xs u-clearfix u-header" id="sec-75b6">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <img class="u-image u-image-contain u-image-default u-image-1"
+                    src="./static/images/namelogo.png" alt
+                    data-image-width="757" data-image-height="114">
+            </div>
+        </header>
+
+        <section class="u-clearfix u-image u-shading u-section-1" id="sec-cea6"
+            data-image-width="1920" data-image-height="1280">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <div
+                    class="u-border-1 u-border-custom-color-17 u-custom-color-17 u-form u-hidden-block u-radius u-form-1 hidden">
+                    <form action="/login"
+                        class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form"
+                        source="email" name="form" style="padding: 50px;"
+                        method="POST">
+                        <div class="u-form-email u-form-group">
+                            <label for="email-ae4f"
+                                class="u-label">Email</label>
+                            <input type="email"
+                                placeholder="Geçerli bir e-posta adresi girin"
+                                id="email-ae4f" name="login_email"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                required="required">
+                        </div>
+                        <div class="u-form-group u-form-group-2">
+                            <label for="text-26c8" class="u-label">Şifre</label>
+                            <input type="password" id="text-26c8"
+                                name="login_password"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                required="required"
+                                placeholder="Geçerli bir şifre girin">
+                        </div>
+                        {% if form_type == 'login' %}
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="alert alert-info mt-3">
+                            <ul>
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        {% endif %}
+                        <div class="u-align-center u-form-group u-form-submit">
+                            <input type="submit" value="Giriş Yap"
+                                class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius u-btn-3">
+                        </div>
+                        <p class="u-form-group u-form-text u-text u-text-1">
+                            <a
+                                class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-text-hover-white u-btn-2"
+                                href="javascript:void(0)"
+                                onclick="showSignupForm()"> Hesabınız yoksa
+                                hesap oluşturmak için tıklayınız.</a>
+                        </p>
+                        <input type="hidden" value name="recaptchaResponse">
+                        <input type="hidden" name="formServices" value>
+                    </form>
+                </div>
+                <div
+                    class="u-border-1 u-border-custom-color-17 u-custom-color-17 u-form u-radius u-form-2">
+                    <form action="/signup"
+                        class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form"
+                        source="email" name="form" style="padding: 50px;"
+                        method="POST">
+                        <div
+                            class="u-form-group u-form-name u-form-partition-factor-2 u-form-group-5">
+                            <label for="name-1f25" class="u-label">Ad</label>
+                            <input type="text" placeholder="Adınızı Girin"
+                                id="name-1f25" name="signup_name"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                required>
+                        </div>
+                        <div
+                            class="u-form-group u-form-name u-form-partition-factor-2 u-form-group-6">
+                            <label for="name-1f25" class="u-label">Soyad</label>
+                            <input type="text" placeholder="Soyadınızı Girin"
+                                id="name-1f25" name="signup_surname"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                required>
+                        </div>
+                        <div class="u-form-email u-form-group">
+                            <label for="email-ae4f"
+                                class="u-label">Email</label>
+                            <input type="email"
+                                placeholder="Geçerli bir e-posta adresi girin"
+                                id="email-ae4f" name="signup_email"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                required="required">
+                        </div>
+                        <div class="u-form-group u-form-group-8">
+                            <label for="text-26c8" class="u-label">Şifre</label>
+                            <input type="password" id="text-26c8"
+                                name="signup_password_1"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                required="required"
+                                placeholder="Geçerli bir şifre girin">
+                        </div>
+                        <div class="u-form-group u-form-group-9">
+                            <label for="text-a22f" class="u-label">Şifre
+                                Tekrar</label>
+                            <input type="password"
+                                placeholder="Geçerli şifreyi tekrar girin"
+                                id="text-a22f" name="signup_password_2"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle">
+                        </div>
+                        {% if form_type == 'signup' %}
+                        {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="alert alert-info mt-3">
+                            <ul>
+                                {% for message in messages %}
+                                <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% endwith %}
+                        {% endif %}
+                        <div class="u-align-center u-form-group u-form-submit">
+                            <input type="submit" value="Kayıt Ol"
+                                class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-btn-submit u-button-style u-custom-color-1 u-radius u-btn-3">
+                        </div>
+                        <p class="u-form-group u-form-text u-text u-text-2">
+                            <a
+                                class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-custom-color-2 u-text-hover-white u-btn-4"
+                                href="javascript:void(0)"
+                                onclick="showLoginForm()">Hesabınız varsa giriş
+                                yapmak için tıklayınız.</a>
+                        </p>
+                        <input type="hidden" value name="recaptchaResponse">
+                        <input type="hidden" name="formServices" value>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer
+            class="u-align-center u-clearfix u-custom-color-11 u-footer u-footer"
+            id="sec-9346">
+            <div class="u-clearfix u-sheet u-sheet-1">
+                <p class="u-small-text u-text u-text-variant u-text-1">Tüm
+                    Haklar Bana Aittir </p>
+            </div>
+        </footer>
+        <script>
+        function showLoginForm() {
+            document.querySelector('.u-form-1').classList.remove('u-hidden-block');
+            document.querySelector('.u-form-2').classList.add('u-hidden-block');
+        }
+
+        function showSignupForm() {
+            document.querySelector('.u-form-2').classList.remove('u-hidden-block');
+            document.querySelector('.u-form-1').classList.add('u-hidden-block');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var formType = "{{ form_type }}";
+            if (formType === 'signup') {
+                showSignupForm();
+            } else if (formType ==='login') {
+                showLoginForm();
+            }
+        });
+    </script>
+    </body>
+</html>

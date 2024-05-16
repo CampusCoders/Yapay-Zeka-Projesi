@@ -33,7 +33,7 @@ def login_or_signup_home():
         return render_template('logged.html', user=user_data)
     else:
        form_type = request.args.get('form', 'login')
-       return render_template('login.html', form_type=form_type)
+       return render_template('login_or_signup.html', form_type=form_type)
 
 @login_or_signup.route('/login', methods=['POST'])
 def login():
@@ -43,13 +43,23 @@ def login():
     try:
         user = auth.sign_in_with_email_and_password(email, password)
         user_id = user['localId']
+
+        user_data = db.child('Users').child(user_id).get().val()
+        if user_data is None:
+            flash('Bu kullanıcı mevcut değil.', 'error')
+            return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
+        
+        if user_data['password'] != password or user_data['email'] != email:
+            flash('Giriş başarısız. Bilgilerinizi kontrol edin.', 'error')
+            return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
+                            
         session['user_id'] = user_id
         return redirect(url_for('login_or_signup.logged'))
 
     except Exception as e:
         error_message = str(e)
         print(f"Login failed: {error_message}")
-        flash('Giriş başarısız. Bilgilerinizi kontrol edin.', 'danger')
+        flash('Giriş başarısız. Bilgilerinizi kontrol edin.', 'error')
         return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
 
 @login_or_signup.route('/signup', methods=['POST'])
@@ -59,42 +69,50 @@ def register():
     email = request.form['signup_email']
     password = request.form['signup_password_1']
     password_confirm = request.form['signup_password_2']
-    
-    if password != password_confirm:
-        flash('Şifreler eşleşmiyor.', 'danger')
+
+    if len(password) < 8 or password != password_confirm:
+        if len(password) < 8:
+            flash('Parola en az 8 karakter olmalıdır.', 'error')
+        if password != password_confirm:
+            flash('Parolalar eşleşmiyor.', 'error')
         return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
-    
-    if len(password) < 8:
-        flash('Şifre en az 8 karakter olmalıdır.', 'danger')
-        return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
+
     
     try:
         user = auth.create_user_with_email_and_password(email=email, password=password)
         user_id = user['localId']
 
         registration_date = datetime.now().strftime("%b %d, %Y at %H:%M:%S UTC+3")
+        sub_types = ['Free', 'Basic', 'Advanced']
+
+        sub_types_descriptions = ['Free paket sadece etkinlik yazısı oluşturur.',
+                                  'Basic paket etkinlik yazısı ve görsel oluşturma içerir.',
+                                  'Advanced paket etkinlik yazısı, görsel oluşturma ve Linkedin API entegrasyonu içerir.']
         
+        sub_daily_rights = ['5','15','30']
+ 
         user_data = {
             'name': name,
             'surname': surname,
             'email': email,
             'password': password,
             'created_at': registration_date,
-            'subscription': "free"
+            'sub_type': sub_types[0],
+            'daily_rights': 5,
+            'expire_date': "none"
         }
 
         sub_data = {
-            'name': name,
-            'surname': surname,
-            'email': email,
-            'sub_type': "free",
-            'expire_date': "none",
-            'sub_price': "none"
+            'description': sub_types_descriptions[0],
+            'price': 0,
+            'price_currency': 'TL',
+            'sub_daily_rights': sub_daily_rights[0],
+            'sub_name': sub_types[0]
         }
 
         db.child('Users').child(user_id).set(user_data)
 
-        db.child('Subscriptions').child("free").child(user_id).set(sub_data)
+        db.child('Subscriptions').child(sub_types[0]).set(sub_data)
         
         session['user_id'] = user_id
         return redirect(url_for('login_or_signup.logged'))
@@ -102,7 +120,7 @@ def register():
     except Exception as e:
         error_message = str(e)
         print(f"Registration failed: {error_message}")
-        flash('Kullanıcı kaydı başarısız. Bu e-posta adresi zaten kullanılıyor.', 'danger')
+        flash('Kullanıcı kaydı başarısız. Bu e-posta adresi zaten kullanılıyor.', 'error')
         return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
 
 @login_or_signup.route('/logged')
