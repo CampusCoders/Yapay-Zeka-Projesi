@@ -1,45 +1,62 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="tr">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <title>Logged</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="screen">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/logged.css') }}" media="screen">
-    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <link id="u-theme-google-font" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i"/>
-    <script type="application/ld+json">{
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <title>Logged</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/logged.css') }}" media="screen">
+  <link id="u-theme-google-font"
+    href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" />
+  <script type="application/ld+json">{
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"name": "EventoSphere"
     }</script>
-    <meta name="theme-color" content="#89b2d8">
-    <meta property="og:title" content="logged">
-    <meta property="og:type" content="website">
-    <meta data-intl-tel-input-cdn-path="intlTelInput/">
-  </head>
+  <meta name="theme-color" content="#89b2d8">
+  <meta property="og:title" content="logged">
+  <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/">
+</head>
 
 
-  <body data-path-to-root="./" data-include-products="false" class="u-body u-overlap u-overlap-transparent u-xl-mode" data-lang="tr">
+<body data-path-to-root="./" data-include-products="false" class="u-body u-overlap u-overlap-transparent u-xl-mode"
+  data-lang="tr">
   <header class="u-align-center-xs u-clearfix u-header" id="sec-75b6">
     <div class="u-clearfix u-sheet u-sheet-1">
-      <img class="u-image u-image-contain u-image-default u-image-1" src="./static/images/namelogo.png" alt="" data-image-width="757" data-image-height="114">
+      <img class="u-image u-image-contain u-image-default u-image-1" src="./static/images/namelogo.png" alt=""
+        data-image-width="757" data-image-height="114">
       <nav class="u-align-right u-menu u-menu-one-level u-offcanvas u-menu-1">
         <div class="menu-collapse" style="font-weight: 700;">
-          <a class="u-button-style u-custom-border-radius u-custom-left-right-menu-spacing u-custom-text-color u-custom-text-hover-color u-custom-text-shadow u-nav-link" href="#">
-            <svg class="u-svg-link" viewBox="0 0 24 24"><use xlink:href="#svg-cc5e"></use></svg>
-            <svg class="u-svg-content" version="1.1" id="svg-cc5e" viewBox="0 0 16 16" x="0px" y="0px" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><g><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect></g></svg>
+          <a class="u-button-style u-custom-border-radius u-custom-left-right-menu-spacing u-custom-text-color u-custom-text-hover-color u-custom-text-shadow u-nav-link"
+            href="#">
+            <svg class="u-svg-link" viewBox="0 0 24 24">
+              <use xlink:href="#svg-cc5e"></use>
+            </svg>
+            <svg class="u-svg-content" version="1.1" id="svg-cc5e" viewBox="0 0 16 16" x="0px" y="0px"
+              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+              <g>
+                <rect y="1" width="16" height="2"></rect>
+                <rect y="7" width="16" height="2"></rect>
+                <rect y="13" width="16" height="2"></rect>
+              </g>
+            </svg>
           </a>
         </div>
         <div class="u-custom-menu u-nav-container">
           <ul class="u-nav u-spacing-29 u-unstyled u-nav-1">
             <li class="u-nav-item">
-              <a class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10 user-menu" style="--radius: 10px; padding: 10px 14px;">{{ user.name }} {{ user.surname }}</a>
+              <a class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10 user-menu"
+                style="--radius: 10px; padding: 10px 14px;">{{ user.name }} {{ user.surname }}</a>
               <ul class="dropdown-menu">
-                <li><a href="/dashboard" class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10">Bilgilerim</a></li>
-                <li><a href="/logout" class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10">Çıkış Yap</a></li>
+                <li><a href="/dashboard"
+                    class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10">Bilgilerim</a>
+                </li>
+                <li><a href="/logout"
+                    class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10">Çıkış
+                    Yap</a></li>
               </ul>
             </li>
           </ul>
@@ -66,211 +83,362 @@
   </header>
 
 
-    <section class="u-clearfix u-image u-section-1" id="carousel_6500" data-image-width="1920" data-image-height="1080">
-      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-sheet-1">
-        <a onclick="smoothScroll('#sec-91be')" class="u-border-hover-black u-border-none u-btn u-btn-round u-button-style u-custom-color-19 u-radius u-text-black u-text-hover-black u-btn-1">Planlamaya Başla&nbsp;<span class="u-file-icon u-icon u-icon-1"><img src="./static/images/271228.png" alt=""></span>
-        </a>
-      </div>
-    </section>
+  <section class="u-clearfix u-image u-section-1" id="carousel_6500" data-image-width="1920" data-image-height="1080">
+    <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-sheet-1">
+      <a onclick="smoothScroll('#sec-91be')"
+        class="u-border-hover-black u-border-none u-btn u-btn-round u-button-style u-custom-color-19 u-radius u-text-black u-text-hover-black u-btn-1">Planlamaya
+        Başla&nbsp;<span class="u-file-icon u-icon u-icon-1"><img src="./static/images/271228.png" alt=""></span>
+      </a>
+    </div>
+  </section>
 
 
-    <section class="skrollable u-align-center u-clearfix u-image u-parallax u-shading u-section-2" src="" id="carousel_7179" data-image-width="1920" data-image-height="839">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-expanded-width u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-align-center u-border-2 u-border-no-bottom u-border-no-left u-border-no-right u-border-white u-container-style u-custom-color-3 u-custom-item u-hover-feature u-list-item u-opacity u-opacity-75 u-radius u-repeater-item u-shape-round u-list-item-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
-              <div class="u-container-layout u-similar-container u-container-layout-1">
-                <h4 class="u-align-left u-hover-feature u-text u-text-1"> Unlimited Classes</h4>
-                <p class="u-align-left u-hover-feature u-text u-text-2"> Classes curated and developed by the industry’s best talent, bringing results through innovation.</p>
-                <a href="#" class="u-align-left u-border-2 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-style u-hover-feature u-none u-text-active-palette-2-base u-text-hover-palette-2-base u-btn-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-animation-direction="">Discover Classes</a>
-              </div>
+  <section class="skrollable u-align-center u-clearfix u-image u-parallax u-shading u-section-2" src=""
+    id="carousel_7179" data-image-width="1920" data-image-height="839">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-expanded-width u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div
+            class="u-align-center u-border-2 u-border-no-bottom u-border-no-left u-border-no-right u-border-white u-container-style u-custom-color-3 u-custom-item u-hover-feature u-list-item u-opacity u-opacity-75 u-radius u-repeater-item u-shape-round u-list-item-1"
+            data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
+            <div class="u-container-layout u-similar-container u-container-layout-1">
+              <h4 class="u-align-left u-hover-feature u-text u-text-1"> Unlimited Classes</h4>
+              <p class="u-align-left u-hover-feature u-text u-text-2"> Classes curated and developed by the industry’s
+                best talent, bringing results through innovation.</p>
+              <a href="#"
+                class="u-align-left u-border-2 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-style u-hover-feature u-none u-text-active-palette-2-base u-text-hover-palette-2-base u-btn-1"
+                data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"
+                data-animation-direction="">Discover Classes</a>
             </div>
-            <div class="u-align-center u-border-2 u-border-no-bottom u-border-no-left u-border-no-right u-border-white u-container-align-left u-container-style u-custom-color-3 u-custom-item u-hover-feature u-list-item u-opacity u-opacity-50 u-radius u-repeater-item u-shape-round u-list-item-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
-              <div class="u-container-layout u-similar-container u-container-layout-2">
-                <h4 class="u-align-left u-hover-feature u-text u-text-3"> Personal Training</h4>
-                <p class="u-align-left u-hover-feature u-text u-text-4"> Performance at its highest level with renowned Personal Training.<br>
-                  <br>
+          </div>
+          <div
+            class="u-align-center u-border-2 u-border-no-bottom u-border-no-left u-border-no-right u-border-white u-container-align-left u-container-style u-custom-color-3 u-custom-item u-hover-feature u-list-item u-opacity u-opacity-50 u-radius u-repeater-item u-shape-round u-list-item-2"
+            data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500">
+            <div class="u-container-layout u-similar-container u-container-layout-2">
+              <h4 class="u-align-left u-hover-feature u-text u-text-3"> Personal Training</h4>
+              <p class="u-align-left u-hover-feature u-text u-text-4"> Performance at its highest level with renowned
+                Personal Training.<br>
+                <br>
+              </p>
+              <a href="#"
+                class="u-align-left u-border-2 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-style u-hover-feature u-none u-text-active-palette-2-base u-text-hover-palette-2-base u-btn-2"
+                data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"
+                data-animation-direction=""> Discover Personal Training</a>
+            </div>
+          </div>
+          <div
+            class="u-align-center u-border-2 u-border-no-bottom u-border-no-left u-border-no-right u-border-white u-container-style u-custom-color-3 u-custom-item u-hover-feature u-list-item u-opacity u-opacity-75 u-radius u-repeater-item u-shape-round u-list-item-3"
+            data-animation-name="customAnimationIn" data-animation-duration="1000" data-animation-delay="0">
+            <div class="u-container-layout u-similar-container u-container-layout-3">
+              <h4 class="u-align-left u-hover-feature u-text u-text-5"> Studio Pilates</h4>
+              <p class="u-align-left u-hover-feature u-text u-text-6"> A purely authentic Pilates experience that
+                strengthens and creates balance in the body.</p>
+              <a href="#"
+                class="u-align-left u-border-2 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-style u-hover-feature u-none u-text-active-palette-2-base u-text-hover-palette-2-base u-btn-3"
+                data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500"
+                data-animation-direction="">Discover Pilates</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </p>
+    </div>
+  </section>
+
+
+  <section class="skrollable u-align-center u-clearfix u-image u-parallax u-shading u-section-3" id="sec-91be"
+    data-image-width="1920" data-image-height="1280">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <div class="u-border-1 u-border-custom-color-1 u-form u-radius u-form-1">
+        <form action="/createEvent" class="u-clearfix u-form-spacing-17 u-form-vertical u-inner-form" 
+          name="form" style="padding: 50px;" method="POST">
+          <div class="u-form-group u-form-group-1">
+            <label for="text-f246" class="u-label">Etkinlik Adi</label>
+            <input type="text" placeholder="" id="text-f246" name="etkinlikAdi"
+              class="u-custom-color-17 u-input u-input-rectangle">
+          </div>
+          <div class="u-form-group u-form-group-2">
+            <label for="text-f246" class="u-label">Etkinlik Konusu</label>
+            <input type="text" id="text-f246" name="etkinlikKonusu" class="u-custom-color-17 u-input u-input-rectangle"
+              required="required">
+          </div>
+          <div class="u-form-group u-form-group-3">
+            <label for="text-f246" class="u-label">Etkinlik Amacı</label>
+            <input type="text" id="text-f246" name="etkinlikAmaci" class="u-custom-color-17 u-input u-input-rectangle"
+              required="required">
+          </div>
+          <div class="u-form-group u-form-group-4">
+            <label for="text-644f" class="u-label">Etkinlik Hedef Kitle</label>
+            <input type="text" placeholder="" id="text-644f" name="etkinlikHedefKitle"
+              class="u-custom-color-17 u-input u-input-rectangle" required="required">
+          </div>
+          <div class="u-form-group u-form-group-5">
+            <label for="text-644f" class="u-label">Etkinlik Platformu</label>
+            <input type="text" placeholder="" id="text-644f" name="etkinlikPlatformu"
+              class="u-custom-color-17 u-input u-input-rectangle" required="required">
+          </div>
+          <div class="u-form-group u-form-group-6">
+            <label for="text-26c6" class="u-label">Etkinlik Katılımcıları</label>
+            <input type="text" placeholder="" id="text-26c6" name="etkinlikKatilimcilari"
+              class="u-custom-color-17 u-input u-input-rectangle" required="required">
+          </div>
+          <div class="u-form-group u-form-group-7">
+            <label for="text-4a00" class="u-label">Etkinlik Moderatörü</label>
+            <input type="text" placeholder="" id="text-4a00" name="etkinlikModeratörü"
+              class="u-custom-color-17 u-input u-input-rectangle">
+          </div>
+          <div class="u-form-group u-form-group-8">
+            <label for="text-275a" class="u-label">Etkinlik Sponsorları / Ortakları</label>
+            <input type="text" placeholder="" id="text-275a" name="etkinlikSponsorlari"
+              class="u-custom-color-17 u-input u-input-rectangle" required="required">
+          </div>
+          <div class="u-form-group u-form-group-9">
+            <label for="text-0100" class="u-label">Etkinlik Sosyal Medya Tagleri</label>
+            <input type="text" placeholder="" id="text-0100" name="etkinlikSosyalMedyaTagleri"
+              class="u-custom-color-17 u-input u-input-rectangle" required="required">
+          </div>
+          <div class="u-form-group u-form-group-10">
+            <label for="text-9b60" class="u-label">Etkinlik Tarihi ve Saati</label>
+            <input type="text" placeholder="" id="text-9b60" name="etkinlikTarihiVeSaati"
+              class="u-custom-color-17 u-input u-input-rectangle" required="required">
+          </div>
+          <div class="u-form-group u-form-textarea u-form-group-11">
+            <label for="textarea-062f" class="u-label">Etkinlik Hakkında Detaylar</label>
+            <textarea rows="4" cols="50" id="textarea-062f" name="etkinlikDetaylari"
+              class="u-custom-color-17 u-input u-input-rectangle" required=""></textarea>
+          </div>
+          <div class="u-form-group u-form-group-12">
+            <label for="text-2b0b" class="u-label">Etkinlik Kayıt-Katılım</label>
+            <input type="text" placeholder="" id="text-2b0b" name="etkinlikKayitKatilim"
+              class="u-custom-color-17 u-input u-input-rectangle" required="required">
+          </div>
+          <button type="submit">Send</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="u-align-center u-clearfix u-image u-shading u-section-4" id="sec-518f" data-image-width="1920"
+    data-image-height="992">
+    <div
+      class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
+      <div class="u-expanded-width u-list u-list-1">
+        <div class="u-repeater u-repeater-1">
+          <div class="u-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-1"><span
+                class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-1"><svg class="u-svg-link"
+                  preserveAspectRatio="xMidYMin slice" viewBox="0 0 60 60" style="">
+                  <use xlink:href="#svg-3e08"></use>
+                </svg><svg id="svg-3e08" x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;"
+                  class="u-svg-content">
+                  <path
+                    d="M48.014,42.889l-9.553-4.776C37.56,37.662,37,36.756,37,35.748v-3.381c0.229-0.28,0.47-0.599,0.719-0.951  c1.239-1.75,2.232-3.698,2.954-5.799C42.084,24.97,43,23.575,43,22v-4c0-0.963-0.36-1.896-1-2.625v-5.319  c0.056-0.55,0.276-3.824-2.092-6.525C37.854,1.188,34.521,0,30,0s-7.854,1.188-9.908,3.53C17.724,6.231,17.944,9.506,18,10.056  v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309  c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C8.801,44.424,7,47.458,7,50.762V54c0,4.746,15.045,6,23,6s23-1.254,23-6v-3.043  C53,47.519,51.089,44.427,48.014,42.889z">
+                  </path>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                  <g></g>
+                </svg></span>
+              <h3 class="u-text u-text-default u-text-1" data-animation-name="counter" data-animation-event="scroll"
+                data-animation-duration="3000">16</h3>
+              <h5 class="u-text u-text-default u-text-2">Specialists</h5>
+            </div>
+          </div>
+          <div class="u-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-2"><span
+                class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-2"><svg class="u-svg-link"
+                  preserveAspectRatio="xMidYMin slice" viewBox="0 0 511.999 511.999" style="">
+                  <use xlink:href="#svg-3852"></use>
+                </svg><svg class="u-svg-content" viewBox="0 0 511.999 511.999" x="0px" y="0px" id="svg-3852"
+                  style="enable-background:new 0 0 511.999 511.999;">
+                  <g>
+                    <g>
+                      <path
+                        d="M438.09,273.32h-39.596c4.036,11.05,6.241,22.975,6.241,35.404v149.65c0,5.182-0.902,10.156-2.543,14.782h65.461    c24.453,0,44.346-19.894,44.346-44.346v-81.581C512,306.476,478.844,273.32,438.09,273.32z">
+                      </path>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <path
+                        d="M107.265,308.725c0-12.43,2.205-24.354,6.241-35.404H73.91c-40.754,0-73.91,33.156-73.91,73.91v81.581    c0,24.452,19.893,44.346,44.346,44.346h65.462c-1.641-4.628-2.543-9.601-2.543-14.783V308.725z">
+                      </path>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <path
+                        d="M301.261,234.815h-90.522c-40.754,0-73.91,33.156-73.91,73.91v149.65c0,8.163,6.618,14.782,14.782,14.782h208.778    c8.164,0,14.782-6.618,14.782-14.782v-149.65C375.171,267.971,342.015,234.815,301.261,234.815z">
+                      </path>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <path
+                        d="M256,38.84c-49.012,0-88.886,39.874-88.886,88.887c0,33.245,18.349,62.28,45.447,77.524    c12.853,7.23,27.671,11.362,43.439,11.362c15.768,0,30.586-4.132,43.439-11.362c27.099-15.244,45.447-44.28,45.447-77.524    C344.886,78.715,305.012,38.84,256,38.84z">
+                      </path>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <path
+                        d="M99.918,121.689c-36.655,0-66.475,29.82-66.475,66.475c0,36.655,29.82,66.475,66.475,66.475    c9.298,0,18.152-1.926,26.195-5.388c13.906-5.987,25.372-16.585,32.467-29.86c4.98-9.317,7.813-19.946,7.813-31.227    C166.393,151.51,136.573,121.689,99.918,121.689z">
+                      </path>
+                    </g>
+                  </g>
+                  <g>
+                    <g>
+                      <path
+                        d="M412.082,121.689c-36.655,0-66.475,29.82-66.475,66.475c0,11.282,2.833,21.911,7.813,31.227    c7.095,13.276,18.561,23.874,32.467,29.86c8.043,3.462,16.897,5.388,26.195,5.388c36.655,0,66.475-29.82,66.475-66.475    C478.557,151.509,448.737,121.689,412.082,121.689z">
+                      </path>
+                    </g>
+                  </g>
+                </svg></span>
+              <h3 class="u-text u-text-default u-text-3" data-animation-name="counter" data-animation-event="scroll"
+                data-animation-duration="3000">47</h3>
+              <h5 class="u-text u-text-default u-text-4">Happy Clients</h5>
+            </div>
+          </div>
+          <div class="u-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-3"><span
+                class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-3"><svg class="u-svg-link"
+                  preserveAspectRatio="xMidYMin slice" viewBox="0 0 31.217 31.217" style="">
+                  <use xlink:href="#svg-34c3"></use>
+                </svg><svg class="u-svg-content" viewBox="0 0 31.217 31.217" x="0px" y="0px" id="svg-34c3"
+                  style="enable-background:new 0 0 31.217 31.217;">
+                  <g>
+                    <g id="c48_bag">
+                      <path
+                        d="M29.066,8.165h-8.303v-1.04c0-4.429-4.201-4.169-4.201-4.169h-1.986c-4.428,0-4.199,4.2-4.199,4.2v1.009H2.042    C-0.076,8.165,0,10.25,0,10.25v4.07c0,0,8.889,3.234,15.543,3.234c7.271,0,15.671-3.266,15.671-3.266V10.25    C31.215,8.066,29.066,8.165,29.066,8.165z M13.18,7.038c0-2.085,2.447-2.116,2.447-2.116c2.482,0,2.406,2.148,2.406,2.148v1.043    H13.18V7.038z M18.189,16.781l-5.164,0.004v-1.991h5.164V16.781z">
+                      </path>
+                      <path
+                        d="M31.215,26.178V15.791c0,0-6.762,3.114-15.716,3.114C7.262,18.905,0,15.694,0,15.694v10.483    c0,2.117,2.008,2.086,2.008,2.086H29.1C31.346,28.264,31.215,26.178,31.215,26.178z M18.189,20.685    c0,0.715-0.576,1.292-1.289,1.292h-2.584c-0.713,0-1.291-0.577-1.291-1.292v-1.332h5.164V20.685z">
+                      </path>
+                    </g>
+                  </g>
+                </svg></span>
+              <h3 class="u-text u-text-default u-text-5" data-animation-name="counter" data-animation-event="scroll"
+                data-animation-duration="3000">56</h3>
+              <h5 class="u-text u-text-default u-text-6">Successful cases</h5>
+            </div>
+          </div>
+          <div class="u-align-center u-container-style u-list-item u-repeater-item">
+            <div class="u-container-layout u-similar-container u-container-layout-4"><span
+                class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-4"><svg class="u-svg-link"
+                  preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style="">
+                  <use xlink:href="#svg-26cd"></use>
+                </svg><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px" id="svg-26cd"
+                  style="enable-background:new 0 0 512 512;">
+                  <g>
+                    <g>
+                      <path
+                        d="M486.4,25.6h-76.8V0H102.4v25.6H25.6C10.24,25.6,0,35.84,0,51.2v61.44c0,58.88,43.52,107.52,102.4,115.2v2.56    c0,74.24,51.2,135.68,120.32,151.04L204.8,435.2h-58.88c-10.24,0-20.48,7.68-23.04,17.92L102.4,512h307.2l-20.48-58.88    c-2.56-10.24-12.8-17.92-23.04-17.92H307.2l-17.92-53.76c69.12-15.36,120.32-76.8,120.32-151.04v-2.56    c58.88-7.68,102.4-56.32,102.4-115.2V51.2C512,35.84,501.76,25.6,486.4,25.6z M102.4,176.64c-28.16-7.68-51.2-33.28-51.2-64V76.8    h51.2V176.64z M307.2,256L256,227.84L204.8,256l12.8-51.2l-38.4-51.2h53.76L256,102.4l23.04,51.2h53.76l-38.4,51.2L307.2,256z     M460.8,112.64c0,30.72-23.04,58.88-51.2,64V76.8h51.2V112.64z">
+                      </path>
+                    </g>
+                  </g>
+                </svg></span>
+              <h3 class="u-text u-text-default u-text-7" data-animation-name="counter" data-animation-event="scroll"
+                data-animation-duration="3000">23</h3>
+              <h5 class="u-text u-text-default u-text-8">Awards</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section
+    class="u-align-center u-clearfix u-container-align-center-sm u-container-align-center-xs u-container-align-left-xxl u-image u-shading u-section-5"
+    id="carousel_2033" data-image-width="2940" data-image-height="1960">
+    <div class="u-clearfix u-sheet u-valign-middle-xxl u-sheet-1">
+      <h1 class="u-align-center u-text u-text-palette-3-base u-text-1" data-animation-name="customAnimationIn"
+        data-animation-duration="1500" data-animation-delay="0">PAKET FİYATLANDIRMALARI </h1>
+      <div class="data-layout-selected u-clearfix u-expanded-width-xs u-gutter-30 u-layout-wrap u-layout-wrap-1">
+        <div class="u-gutter-0 u-layout">
+          <div class="u-layout-row">
+            <div
+              class="u-align-center u-black u-container-style u-layout-cell u-left-cell u-opacity u-opacity-45 u-size-30 u-layout-cell-1">
+              <div class="u-container-layout u-valign-top u-container-layout-1">
+                <div
+                  class="u-align-center u-container-align-center-xs u-container-style u-custom-color-1 u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
+                  <div
+                    class="u-container-layout u-valign-middle-xs u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-2">
+                    <h5 class="u-align-center-xs u-text u-text-2">FREE </h5>
+                    <h2 class="u-align-center-xs u-text u-text-3">$ 0</h2>
+                  </div>
+                </div>
+                <p class="u-text u-text-4">1 Tam Etkinlik Planlama<br>10 Etkinlik Parçası Düzenleme<br>1 Etkinlik
+                  Paylaşımı
                 </p>
-                <a href="#" class="u-align-left u-border-2 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-style u-hover-feature u-none u-text-active-palette-2-base u-text-hover-palette-2-base u-btn-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-animation-direction=""> Discover Personal Training</a>
+                <a href="#"
+                  class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-button-style u-custom-color-3 u-hover-palette-3-base u-radius u-btn-1"
+                  target="_blank">satın al </a>
               </div>
             </div>
-            <div class="u-align-center u-border-2 u-border-no-bottom u-border-no-left u-border-no-right u-border-white u-container-style u-custom-color-3 u-custom-item u-hover-feature u-list-item u-opacity u-opacity-75 u-radius u-repeater-item u-shape-round u-list-item-3" data-animation-name="customAnimationIn" data-animation-duration="1000" data-animation-delay="0">
-              <div class="u-container-layout u-similar-container u-container-layout-3">
-                <h4 class="u-align-left u-hover-feature u-text u-text-5"> Studio Pilates</h4>
-                <p class="u-align-left u-hover-feature u-text u-text-6"> A purely authentic Pilates experience that strengthens and creates balance in the body.</p>
-                <a href="#" class="u-align-left u-border-2 u-border-active-palette-2-base u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-style u-hover-feature u-none u-text-active-palette-2-base u-text-hover-palette-2-base u-btn-3" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="500" data-animation-direction="">Discover Pilates</a>
+            <div
+              class="u-align-center u-black u-container-style u-layout-cell u-opacity u-opacity-45 u-size-30 u-layout-cell-2">
+              <div class="u-container-layout u-valign-top u-container-layout-3">
+                <div
+                  class="u-align-center u-container-align-center-xs u-container-style u-custom-color-3 u-expanded-width u-group u-group-2">
+                  <div class="u-container-layout u-valign-middle-xs u-container-layout-4">
+                    <h5 class="u-align-center-xs u-text u-text-5">Standart</h5>
+                    <h2 class="u-align-center-xs u-text u-text-6">$ 30</h2>
+                  </div>
+                </div>
+                <p class="u-text u-text-7"> 10 Tam Etkinlik Planlama<br>100 Etkinlik Parçası Düzenleme<br>10 Etkinlik
+                  Paylaşımı<br>Etkinliğinize özgü görsel tasarlatma
+                </p>
+                <a href="#"
+                  class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-button-style u-custom-color-3 u-hover-custom-color-1 u-radius u-btn-2"
+                  target="_blank"> satın al </a>
               </div>
             </div>
-          </div>
-        </div>
-        <p class="u-align-center u-large-text u-text u-text-default u-text-variant u-text-white u-text-7">Image from <a href="https://www.freepik.com/photos/people" class="u-active-none u-border-1 u-border-active-grey-5 u-border-hover-grey-5 u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-link u-button-style u-hover-none u-none u-text-body-alt-color u-btn-4">Freepik</a>
-        </p>
-      </div>
-    </section>
-
-
-    <section class="skrollable u-align-center u-clearfix u-image u-parallax u-shading u-section-3" id="sec-91be" data-image-width="1920" data-image-height="1280">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-border-1 u-border-custom-color-1 u-form u-radius u-form-1">
-          <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-spacing-17 u-form-vertical u-inner-form" source="email" name="form" style="padding: 50px;">
-            <div class="u-form-group u-form-group-1">
-              <label for="text-f246" class="u-label">Etkinlik Adi</label>
-              <input type="text" placeholder="" id="text-f246" name="etkinlikAdi" class="u-custom-color-17 u-input u-input-rectangle">
-            </div>
-            <div class="u-form-email u-form-group">
-              <label for="email-9f94" class="u-label">Etkinlik Konusu / Amacı</label>
-              <input type="email" id="email-9f94" name="etkinlikAmaci" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-select u-form-group-3">
-              <label for="select-f2da" class="u-label">Etkinlik Hedef Kitle</label>
-              <div class="u-form-select-wrapper">
-                <select id="select-f2da" name="etkinlikHedefKitle" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-                  <option value="ogrenci" data-calc="ogrenci">Öğrenci</option>
-                  <option value="calisan" data-calc="calisan">Çalışan</option>
-                  <option value="yeni_mezun" data-calc="yeni_mezun">Yeni Mezun</option>
-                </select>
-                <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
-              </div>
-            </div>
-            <div class="u-form-group u-form-group-4">
-              <label for="text-644f" class="u-label">Etkinlik Platformu</label>
-              <input type="text" placeholder="" id="text-644f" name="etkinlikPlatformu" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-group-5">
-              <label for="text-26c6" class="u-label">Etkinlik Katılımcıları</label>
-              <input type="text" placeholder="" id="text-26c6" name="etkinlikKatilimcilari" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-group-6">
-              <label for="text-4a00" class="u-label">Etkinlik Sunuculari</label>
-              <input type="text" placeholder="" id="text-4a00" name="etkinlikSunuculari" class="u-custom-color-17 u-input u-input-rectangle">
-            </div>
-            <div class="u-form-group u-form-group-7">
-              <label for="text-2b0b" class="u-label">Etkinlik Kayıt-Katılım</label>
-              <input type="text" placeholder="" id="text-2b0b" name="etkinlikKayitKatilim" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-group-8">
-              <label for="text-275a" class="u-label">Etkinlik Sponsorları / Ortakları</label>
-              <input type="text" placeholder="" id="text-275a" name="etkinlikSponsorlari" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-group-9">
-              <label for="text-0100" class="u-label">Etkinlik Sosyal Medya Tagleri</label>
-              <input type="text" placeholder="" id="text-0100" name="etkinlikSosyalMedyaTagleri" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-group-10">
-              <label for="text-9b60" class="u-label">Etkinlik Tarihi ve Saati</label>
-              <input type="text" placeholder="" id="text-9b60" name="etkinlikTarihiVeSaati" class="u-custom-color-17 u-input u-input-rectangle" required="required">
-            </div>
-            <div class="u-form-group u-form-textarea u-form-group-11">
-              <label for="textarea-062f" class="u-label">Etkinlik Hakkında Detaylar</label>
-              <textarea rows="4" cols="50" id="textarea-062f" name="etkinlikHakkindaDetaylar" class="u-custom-color-17 u-input u-input-rectangle" required=""></textarea>
-            </div>
-            <div class="u-align-center u-form-group u-form-submit">
-              <a href="#" class="u-border-2 u-border-custom-color-2 u-border-hover-custom-color-19 u-btn u-btn-round u-btn-submit u-button-style u-custom-color-10 u-radius u-text-custom-color-18 u-btn-1">OLUŞTUR</a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
-            </div>
-            <div class="u-form-send-message u-form-send-success"> Teşekkür ederiz! Mesajınız gönderildi. </div>
-            <div class="u-form-send-error u-form-send-message"> Mesajınız gönderilemedi. Lütfen hataları düzeltin ve tekrar deneyin. </div>
-            <input type="hidden" value="" name="recaptchaResponse">
-            <input type="hidden" name="formServices" value="">
-          </form>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="u-align-center u-clearfix u-image u-shading u-section-4" id="sec-518f" data-image-width="1920" data-image-height="992">
-      <div class="u-clearfix u-sheet u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-sheet-1">
-        <div class="u-expanded-width u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-1"><span class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-1"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 60 60" style=""><use xlink:href="#svg-3e08"></use></svg><svg id="svg-3e08" x="0px" y="0px" viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" class="u-svg-content"><path d="M48.014,42.889l-9.553-4.776C37.56,37.662,37,36.756,37,35.748v-3.381c0.229-0.28,0.47-0.599,0.719-0.951  c1.239-1.75,2.232-3.698,2.954-5.799C42.084,24.97,43,23.575,43,22v-4c0-0.963-0.36-1.896-1-2.625v-5.319  c0.056-0.55,0.276-3.824-2.092-6.525C37.854,1.188,34.521,0,30,0s-7.854,1.188-9.908,3.53C17.724,6.231,17.944,9.506,18,10.056  v5.319c-0.64,0.729-1,1.662-1,2.625v4c0,1.217,0.553,2.352,1.497,3.109c0.916,3.627,2.833,6.36,3.503,7.237v3.309  c0,0.968-0.528,1.856-1.377,2.32l-8.921,4.866C8.801,44.424,7,47.458,7,50.762V54c0,4.746,15.045,6,23,6s23-1.254,23-6v-3.043  C53,47.519,51.089,44.427,48.014,42.889z"></path><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg></span>
-                <h3 class="u-text u-text-default u-text-1" data-animation-name="counter" data-animation-event="scroll" data-animation-duration="3000">16</h3>
-                <h5 class="u-text u-text-default u-text-2">Specialists</h5>
-              </div>
-            </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-2"><span class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-2"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 511.999 511.999" style=""><use xlink:href="#svg-3852"></use></svg><svg class="u-svg-content" viewBox="0 0 511.999 511.999" x="0px" y="0px" id="svg-3852" style="enable-background:new 0 0 511.999 511.999;"><g><g><path d="M438.09,273.32h-39.596c4.036,11.05,6.241,22.975,6.241,35.404v149.65c0,5.182-0.902,10.156-2.543,14.782h65.461    c24.453,0,44.346-19.894,44.346-44.346v-81.581C512,306.476,478.844,273.32,438.09,273.32z"></path></g></g><g><g><path d="M107.265,308.725c0-12.43,2.205-24.354,6.241-35.404H73.91c-40.754,0-73.91,33.156-73.91,73.91v81.581    c0,24.452,19.893,44.346,44.346,44.346h65.462c-1.641-4.628-2.543-9.601-2.543-14.783V308.725z"></path></g></g><g><g><path d="M301.261,234.815h-90.522c-40.754,0-73.91,33.156-73.91,73.91v149.65c0,8.163,6.618,14.782,14.782,14.782h208.778    c8.164,0,14.782-6.618,14.782-14.782v-149.65C375.171,267.971,342.015,234.815,301.261,234.815z"></path></g></g><g><g><path d="M256,38.84c-49.012,0-88.886,39.874-88.886,88.887c0,33.245,18.349,62.28,45.447,77.524    c12.853,7.23,27.671,11.362,43.439,11.362c15.768,0,30.586-4.132,43.439-11.362c27.099-15.244,45.447-44.28,45.447-77.524    C344.886,78.715,305.012,38.84,256,38.84z"></path></g></g><g><g><path d="M99.918,121.689c-36.655,0-66.475,29.82-66.475,66.475c0,36.655,29.82,66.475,66.475,66.475    c9.298,0,18.152-1.926,26.195-5.388c13.906-5.987,25.372-16.585,32.467-29.86c4.98-9.317,7.813-19.946,7.813-31.227    C166.393,151.51,136.573,121.689,99.918,121.689z"></path></g></g><g><g><path d="M412.082,121.689c-36.655,0-66.475,29.82-66.475,66.475c0,11.282,2.833,21.911,7.813,31.227    c7.095,13.276,18.561,23.874,32.467,29.86c8.043,3.462,16.897,5.388,26.195,5.388c36.655,0,66.475-29.82,66.475-66.475    C478.557,151.509,448.737,121.689,412.082,121.689z"></path></g></g></svg></span>
-                <h3 class="u-text u-text-default u-text-3" data-animation-name="counter" data-animation-event="scroll" data-animation-duration="3000">47</h3>
-                <h5 class="u-text u-text-default u-text-4">Happy Clients</h5>
-              </div>
-            </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-3"><span class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-3"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 31.217 31.217" style=""><use xlink:href="#svg-34c3"></use></svg><svg class="u-svg-content" viewBox="0 0 31.217 31.217" x="0px" y="0px" id="svg-34c3" style="enable-background:new 0 0 31.217 31.217;"><g><g id="c48_bag"><path d="M29.066,8.165h-8.303v-1.04c0-4.429-4.201-4.169-4.201-4.169h-1.986c-4.428,0-4.199,4.2-4.199,4.2v1.009H2.042    C-0.076,8.165,0,10.25,0,10.25v4.07c0,0,8.889,3.234,15.543,3.234c7.271,0,15.671-3.266,15.671-3.266V10.25    C31.215,8.066,29.066,8.165,29.066,8.165z M13.18,7.038c0-2.085,2.447-2.116,2.447-2.116c2.482,0,2.406,2.148,2.406,2.148v1.043    H13.18V7.038z M18.189,16.781l-5.164,0.004v-1.991h5.164V16.781z"></path><path d="M31.215,26.178V15.791c0,0-6.762,3.114-15.716,3.114C7.262,18.905,0,15.694,0,15.694v10.483    c0,2.117,2.008,2.086,2.008,2.086H29.1C31.346,28.264,31.215,26.178,31.215,26.178z M18.189,20.685    c0,0.715-0.576,1.292-1.289,1.292h-2.584c-0.713,0-1.291-0.577-1.291-1.292v-1.332h5.164V20.685z"></path></g></g></svg></span>
-                <h3 class="u-text u-text-default u-text-5" data-animation-name="counter" data-animation-event="scroll" data-animation-duration="3000">56</h3>
-                <h5 class="u-text u-text-default u-text-6">Successful cases</h5>
-              </div>
-            </div>
-            <div class="u-align-center u-container-style u-list-item u-repeater-item">
-              <div class="u-container-layout u-similar-container u-container-layout-4"><span class="u-icon u-icon-circle u-radius-10 u-text-palette-3-base u-icon-4"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 512 512" style=""><use xlink:href="#svg-26cd"></use></svg><svg class="u-svg-content" viewBox="0 0 512 512" x="0px" y="0px" id="svg-26cd" style="enable-background:new 0 0 512 512;"><g><g><path d="M486.4,25.6h-76.8V0H102.4v25.6H25.6C10.24,25.6,0,35.84,0,51.2v61.44c0,58.88,43.52,107.52,102.4,115.2v2.56    c0,74.24,51.2,135.68,120.32,151.04L204.8,435.2h-58.88c-10.24,0-20.48,7.68-23.04,17.92L102.4,512h307.2l-20.48-58.88    c-2.56-10.24-12.8-17.92-23.04-17.92H307.2l-17.92-53.76c69.12-15.36,120.32-76.8,120.32-151.04v-2.56    c58.88-7.68,102.4-56.32,102.4-115.2V51.2C512,35.84,501.76,25.6,486.4,25.6z M102.4,176.64c-28.16-7.68-51.2-33.28-51.2-64V76.8    h51.2V176.64z M307.2,256L256,227.84L204.8,256l12.8-51.2l-38.4-51.2h53.76L256,102.4l23.04,51.2h53.76l-38.4,51.2L307.2,256z     M460.8,112.64c0,30.72-23.04,58.88-51.2,64V76.8h51.2V112.64z"></path></g></g></svg></span>
-                <h3 class="u-text u-text-default u-text-7" data-animation-name="counter" data-animation-event="scroll" data-animation-duration="3000">23</h3>
-                <h5 class="u-text u-text-default u-text-8">Awards</h5>
+            <div
+              class="u-align-center u-black u-container-style u-layout-cell u-opacity u-opacity-45 u-size-30 u-layout-cell-2">
+              <div class="u-container-layout u-valign-top u-container-layout-3">
+                <div
+                  class="u-align-center u-container-align-center-xs u-container-style u-custom-color-3 u-expanded-width u-group u-group-2">
+                  <div class="u-container-layout u-valign-middle-xs u-container-layout-4">
+                    <h5 class="u-align-center-xs u-text u-text-5">Gelecek Paket</h5>
+                    <h2 class="u-align-center-xs u-text u-text-6">$ --</h2>
+                  </div>
+                </div>
+                <p class="u-text u-text-7"> Sesli komut ile içerikleri doldurma<br>Etkinliğinizi kısaca anlatın,
+                  etkinliğinizi biz oluşturalım
+                </p>
+                <a href="#"
+                  class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-button-style u-custom-color-3 u-hover-custom-color-1 u-radius u-btn-2"
+                  target="_blank"> satın al </a>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
 
-    <section class="u-align-center u-clearfix u-container-align-center-sm u-container-align-center-xs u-container-align-left-xxl u-image u-shading u-section-5" id="carousel_2033" data-image-width="2940" data-image-height="1960">
-      <div class="u-clearfix u-sheet u-valign-middle-xxl u-sheet-1">
-        <h1 class="u-align-center u-text u-text-palette-3-base u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="0">PAKET FİYATLANDIRMALARI </h1>
-        <div class="data-layout-selected u-clearfix u-expanded-width-xs u-gutter-30 u-layout-wrap u-layout-wrap-1">
-          <div class="u-gutter-0 u-layout">
-            <div class="u-layout-row">
-              <div class="u-align-center u-black u-container-style u-layout-cell u-left-cell u-opacity u-opacity-45 u-size-30 u-layout-cell-1">
-                <div class="u-container-layout u-valign-top u-container-layout-1">
-                  <div class="u-align-center u-container-align-center-xs u-container-style u-custom-color-1 u-expanded-width-sm u-expanded-width-xs u-group u-group-1">
-                    <div class="u-container-layout u-valign-middle-xs u-valign-top-lg u-valign-top-md u-valign-top-xl u-container-layout-2">
-                      <h5 class="u-align-center-xs u-text u-text-2">FREE </h5>
-                      <h2 class="u-align-center-xs u-text u-text-3">$ 0</h2>
-                    </div>
-                  </div>
-                  <p class="u-text u-text-4">1 Tam Etkinlik Planlama<br>10 Etkinlik Parçası Düzenleme<br>1 Etkinlik Paylaşımı
-                  </p>
-                  <a href="#" class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-button-style u-custom-color-3 u-hover-palette-3-base u-radius u-btn-1" target="_blank">satın al </a>
-                </div>
-              </div>
-              <div class="u-align-center u-black u-container-style u-layout-cell u-opacity u-opacity-45 u-size-30 u-layout-cell-2">
-                <div class="u-container-layout u-valign-top u-container-layout-3">
-                  <div class="u-align-center u-container-align-center-xs u-container-style u-custom-color-3 u-expanded-width u-group u-group-2">
-                    <div class="u-container-layout u-valign-middle-xs u-container-layout-4">
-                      <h5 class="u-align-center-xs u-text u-text-5">Standart</h5>
-                      <h2 class="u-align-center-xs u-text u-text-6">$ 30</h2>
-                    </div>
-                  </div>
-                  <p class="u-text u-text-7"> 10 Tam Etkinlik Planlama<br>100 Etkinlik Parçası Düzenleme<br>10 Etkinlik Paylaşımı<br>Etkinliğinize özgü görsel tasarlatma
-                  </p>
-                  <a href="#" class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-button-style u-custom-color-3 u-hover-custom-color-1 u-radius u-btn-2" target="_blank"> satın al </a>
-                </div>
-              </div>
-              <div class="u-align-center u-black u-container-style u-layout-cell u-opacity u-opacity-45 u-size-30 u-layout-cell-2">
-                <div class="u-container-layout u-valign-top u-container-layout-3">
-                  <div class="u-align-center u-container-align-center-xs u-container-style u-custom-color-3 u-expanded-width u-group u-group-2">
-                    <div class="u-container-layout u-valign-middle-xs u-container-layout-4">
-                      <h5 class="u-align-center-xs u-text u-text-5">Gelecek Paket</h5>
-                      <h2 class="u-align-center-xs u-text u-text-6">$ --</h2>
-                    </div>
-                  </div>
-                  <p class="u-text u-text-7"> Sesli komut ile içerikleri doldurma<br>Etkinliğinizi kısaca anlatın, etkinliğinizi biz oluşturalım
-                  </p>
-                  <a href="#" class="u-border-2 u-border-custom-color-2 u-btn u-btn-round u-button-style u-custom-color-3 u-hover-custom-color-1 u-radius u-btn-2" target="_blank"> satın al </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-     
-    <footer class="u-align-center u-clearfix u-custom-color-11 u-footer u-footer" id="sec-9346"><div class="u-clearfix u-sheet u-sheet-1">
-        <p class="u-small-text u-text u-text-variant u-text-1">Tüm Haklar Bana Aittir </p>
-      </div>
-    </footer>
-  </body>
-  <script>
-    function smoothScroll(target) {
+  <footer class="u-align-center u-clearfix u-custom-color-11 u-footer u-footer" id="sec-9346">
+    <div class="u-clearfix u-sheet u-sheet-1">
+      <p class="u-small-text u-text u-text-variant u-text-1">Tüm Haklar Bana Aittir </p>
+    </div>
+  </footer>
+</body>
+<script>
+  function smoothScroll(target) {
     var targetPosition = document.querySelector(target).offsetTop;
     var startPosition = window.pageYOffset;
     var distance = targetPosition - startPosition;
@@ -278,22 +446,23 @@
     var duration = 1000; // animasyon süresi (milisaniye cinsinden)
 
     function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        var timeElapsed = currentTime - startTime;
-        var run = ease(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
+      if (startTime === null) startTime = currentTime;
+      var timeElapsed = currentTime - startTime;
+      var run = ease(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
     }
 
     function ease(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t + b;
-        t--;
-        return -c / 2 * (t * (t - 2) - 1) + b;
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
     }
 
     requestAnimationFrame(animation);
-}
+  }
 
-  </script>
+</script>
+
 </html>

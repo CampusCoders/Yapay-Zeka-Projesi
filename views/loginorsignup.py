@@ -46,11 +46,11 @@ def login():
 
         user_data = db.child('Users').child(user_id).get().val()
         if user_data is None:
-            flash('Bu kullanıcı mevcut değil.', 'error')
+            print('Bu kullanıcı mevcut değil.', 'error')
             return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
         
         if user_data['password'] != password or user_data['email'] != email:
-            flash('Giriş başarısız. Bilgilerinizi kontrol edin.', 'error')
+            print('Giriş başarısız. Bilgilerinizi kontrol edin.', 'error')
             return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
                             
         session['user_id'] = user_id

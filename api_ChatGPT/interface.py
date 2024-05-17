@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from openai import OpenAI
 import os
 from dotenv import load_dotenv, find_dotenv
-import prompts
+from api_ChatGPT import prompts
 
 _ = load_dotenv(find_dotenv())
 client = OpenAI(
