@@ -10,6 +10,8 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" media="screen">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
       body {
         font-family: 'Roboto', sans-serif;
@@ -19,6 +21,25 @@
       }
       .form-container {
         margin-top: 20px;
+      }
+      .center-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 20px;
+      }
+      .password-container {
+        position: relative;
+      }
+      .password-container input {
+        padding-right: 30px;
+      }
+      .password-container .toggle-password {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
       }
     </style>
   </head>
@@ -66,13 +87,18 @@
       <div class="form-container">
         <form action="/reset_password" method="post" class="form-group">
           <label for="new_password">Enter New Password:</label>
-          <input
-            type="password"
-            id="new_password"
-            name="new_password"
-            class="form-control"
-            required
-          />
+          <div class="password-container">
+            <input
+              type="password"
+              id="new_password"
+              name="new_password"
+              class="form-control"
+              required
+            />
+            <span class="toggle-password">
+              <i class="fas fa-eye" id="eyeIcon"></i>
+            </span>
+          </div>
           <button type="submit" class="btn btn-primary mt-2">Reset Password</button>
         </form>
       </div>
@@ -91,6 +117,32 @@
         </form>
       </div>
 
+      <div class="center-buttons">
+        <button type="button" class="btn btn-primary mt-2" id="linkedinButton">LinkedIn</button>
+        <button type="button" class="btn btn-danger mt-2" id="deleteAccountButton">Hesabı sil</button>
+      </div>
+
+      <!-- Pop-up Modal -->
+      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="confirmationModalLabel">Emin misiniz?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              Bu işlemi yapmak istediğinize emin misiniz?
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button>
+              <button type="button" class="btn btn-primary" id="confirmButton">Evet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {% with messages = get_flashed_messages() %}
       {% if messages %}
       <div class="alert alert-info mt-3">
@@ -103,10 +155,41 @@
       {% endif %}
       {% endwith %}
     </div>
-
+    
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+      document.getElementById('linkedinButton').addEventListener('click', function() {
+        $('#confirmationModal').modal('show');
+      });
+
+      document.getElementById('deleteAccountButton').addEventListener('click', function() {
+        $('#confirmationModal').modal('show');
+      });
+
+      document.getElementById('confirmButton').addEventListener('click', function() {
+        // Add your form submission or action logic here
+        $('#confirmationModal').modal('hide');
+      });
+
+      const togglePassword = document.querySelector('.toggle-password');
+      const passwordInput = document.getElementById('new_password');
+      const eyeIcon = document.getElementById('eye-icon');
+
+      togglePassword.addEventListener('click', function() {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        if (type === 'password') {
+          eyeIcon.classList.remove('fa-eye-slash');
+          eyeIcon.classList.add('fa-eye');
+        } else {
+          eyeIcon.classList.remove('fa-eye');
+          eyeIcon.classList.add('fa-eye-slash');
+        }
+      });
+    </script>
   </body>
 </html>

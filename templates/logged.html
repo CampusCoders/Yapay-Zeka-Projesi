@@ -8,6 +8,10 @@
   <title>Logged</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="screen">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/logged.css') }}" media="screen">
+  <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   <link id="u-theme-google-font"
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" />
   <script type="application/ld+json">{
@@ -24,62 +28,24 @@
 
 <body data-path-to-root="./" data-include-products="false" class="u-body u-overlap u-overlap-transparent u-xl-mode"
   data-lang="tr">
-  <header class="u-align-center-xs u-clearfix u-header" id="sec-75b6">
-    <div class="u-clearfix u-sheet u-sheet-1">
+  <header class="u-align-center-xs u-clearfix u-header u-clearfix u-sheet u-sheet-1" id="sec-75b6">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <img class="u-image u-image-contain u-image-default u-image-1" src="./static/images/namelogo.png" alt=""
-        data-image-width="757" data-image-height="114">
-      <nav class="u-align-right u-menu u-menu-one-level u-offcanvas u-menu-1">
-        <div class="menu-collapse" style="font-weight: 700;">
-          <a class="u-button-style u-custom-border-radius u-custom-left-right-menu-spacing u-custom-text-color u-custom-text-hover-color u-custom-text-shadow u-nav-link"
-            href="#">
-            <svg class="u-svg-link" viewBox="0 0 24 24">
-              <use xlink:href="#svg-cc5e"></use>
-            </svg>
-            <svg class="u-svg-content" version="1.1" id="svg-cc5e" viewBox="0 0 16 16" x="0px" y="0px"
-              xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-              <g>
-                <rect y="1" width="16" height="2"></rect>
-                <rect y="7" width="16" height="2"></rect>
-                <rect y="13" width="16" height="2"></rect>
-              </g>
-            </svg>
-          </a>
-        </div>
-        <div class="u-custom-menu u-nav-container">
-          <ul class="u-nav u-spacing-29 u-unstyled u-nav-1">
-            <li class="u-nav-item">
-              <a class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10 user-menu"
-                style="--radius: 10px; padding: 10px 14px;">{{ user.name }} {{ user.surname }}</a>
-              <ul class="dropdown-menu">
-                <li><a href="/dashboard"
-                    class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10">Bilgilerim</a>
-                </li>
-                <li><a href="/logout"
-                    class="u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10">Çıkış
-                    Yap</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        <div class="u-custom-menu u-nav-container-collapse">
-          <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-            <div class="u-inner-container-layout u-sidenav-overflow">
-              <div class="u-menu-close"></div>
-              <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-                <li class="u-nav-item">
-                  <a class="u-button-style u-nav-link">{{ user.name }} {{ user.surname }}</a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/dashboard" class="u-button-style u-nav-link">Bilgilerim</a></li>
-                    <li><a href="/logout" class="u-button-style u-nav-link">Çıkış Yap</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-        </div>
-      </nav>
-    </div>
+      data-image-width="757" data-image-height="114">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link u-border-2 u-button-style u-nav-link u-radius u-text-grey-10">{{ user.name }} {{ user.surname }}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10" href="/dashboard" type="submit">Bilgilerim</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10" style="color: rgb(185, 36, 36) !important;" href="/logout" type="submit">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </header>
 
 
