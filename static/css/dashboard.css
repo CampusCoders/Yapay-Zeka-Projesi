@@ -1,0 +1,28 @@
+body {
+  font-family: "Roboto", sans-serif;
+}
+.navbar {
+  margin-bottom: 20px;
+}
+.form-container {
+  margin-top: 20px;
+}
+.center-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+.password-container {
+  position: relative;
+}
+.password-container input {
+  padding-right: 30px;
+}
+.password-container .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

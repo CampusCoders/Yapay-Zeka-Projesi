@@ -39,7 +39,7 @@ def login_or_signup_home():
 def login():
     email = request.form['login_email']
     password = request.form['login_password']
-
+    
     try:
         user = auth.sign_in_with_email_and_password(email, password)
         user_id = user['localId']
@@ -129,49 +129,6 @@ def logged():
         user_id = session['user_id']
         user_data = db.child('Users').child(user_id).get().val()
         return render_template('logged.html', user=user_data)
-    else:
-        return redirect(url_for('login_or_signup.login_or_signup_home'))
-
-@login_or_signup.route('/dashboard')
-def dashboard():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        user_data = db.child('Users').child(user_id).get().val()
-        return render_template('dashboard.html', user=user_data)
-    else:
-        return redirect(url_for('login_or_signup.login_or_signup_home'))
-    
-@login_or_signup.route('/reset_password', methods=['POST'])
-def reset_password():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        new_password = request.form['new_password']
-        try:
-            user = auth2.update_user(user_id, password=new_password)
-            db.child('Users').child(user_id).update({'password': new_password})
-            flash('Password successfully changed.', 'success')
-            return redirect(url_for('login_or_signup.dashboard'))
-        except Exception as e:
-            print(e)
-            flash('Failed to change password.', 'error')
-            return redirect(url_for('login_or_signup.dashboard'))
-    else:
-        return redirect(url_for('login_or_signup.login_or_signup_home'))
-    
-@login_or_signup.route('/change_email', methods=['POST'])
-def change_email():
-    if 'user_id' in session:
-        user_id = session['user_id']
-        new_email = request.form['new_email']
-        try:
-            user = auth2.update_user(user_id, email=new_email)
-            db.child('Users').child(user_id).update({'email': new_email})
-            flash('Email successfully changed.', 'success')
-            return redirect(url_for('login_or_signup.dashboard'))
-        except Exception as e:
-            print(e)
-            flash('Failed to change email.', 'error')
-            return redirect(url_for('login_or_signup.dashboard'))
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
 

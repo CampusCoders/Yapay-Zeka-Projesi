@@ -8,40 +8,12 @@
     <!-- Bootstrap CSS -->
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" media="screen">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-      }
-      .navbar {
-        margin-bottom: 20px;
-      }
-      .form-container {
-        margin-top: 20px;
-      }
-      .center-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 20px;
-      }
-      .password-container {
-        position: relative;
-      }
-      .password-container input {
-        padding-right: 30px;
-      }
-      .password-container .toggle-password {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-      }
-    </style>
+      rel="stylesheet" />
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+      media="screen">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   </head>
   <body>
     <!-- Navigation Bar -->
@@ -54,8 +26,7 @@
         data-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
@@ -64,7 +35,8 @@
             <a class="nav-link">{{ user.name }} {{ user.surname }}</a>
           </li>
           <li class="nav-item">
-              <a class="btn btn-outline-light" href="/logout" type="submit">Logout</a>
+            <a class="btn btn-outline-light" href="/logout"
+              type="submit">Logout</a>
           </li>
         </ul>
       </div>
@@ -85,21 +57,34 @@
       </div>
 
       <div class="form-container">
-        <form action="/reset_password" method="post" class="form-group">
+        <form action="/change_password" method="post" class="form-group">
           <label for="new_password">Enter New Password:</label>
+          <div class="password-container">
+            <input
+              type="password"
+              id="old_password"
+              name="old_password"
+              class="form-control"
+              placeholder="Current Password"
+              required />
+            <span class="toggle-password">
+              <i class="fas fa-eye" id="eyeIcon"></i>
+            </span>
+          </div>
           <div class="password-container">
             <input
               type="password"
               id="new_password"
               name="new_password"
               class="form-control"
-              required
-            />
+              placeholder="New Password"
+              required />
             <span class="toggle-password">
               <i class="fas fa-eye" id="eyeIcon"></i>
             </span>
           </div>
-          <button type="submit" class="btn btn-primary mt-2">Reset Password</button>
+          <button type="submit" class="btn btn-primary mt-2">Reset
+            Password</button>
         </form>
       </div>
 
@@ -111,24 +96,35 @@
             id="new_email"
             name="new_email"
             class="form-control"
-            required
-          />
-          <button type="submit" class="btn btn-primary mt-2">Change Email</button>
+            placeholder="New Email"
+            required />
+          <button type="submit" class="btn btn-primary mt-2">Change
+            Email</button>
         </form>
       </div>
 
       <div class="center-buttons">
-        <button type="button" class="btn btn-primary mt-2" id="linkedinButton">LinkedIn</button>
-        <button type="button" class="btn btn-danger mt-2" id="deleteAccountButton">Hesabı sil</button>
+        <button type="button" class="btn btn-primary mt-2" id="linkedinButton">
+          <img src="static/images/signin-with-linkedin-button.png"
+            alt="LinkedIn"
+            style="width: auto; height: auto;">
+        </button>
+        <button type="button" class="btn btn-danger mt-2"
+          id="deleteAccountButton">Hesabı sil</button>
+        <form id="deleteAccountForm" action="/delete_user" method="POST"
+          style="display:none;"></form>
       </div>
 
       <!-- Pop-up Modal -->
-      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+        aria-labelledby="confirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="confirmationModalLabel">Emin misiniz?</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h5 class="modal-title" id="confirmationModalLabel">Emin
+                misiniz?</h5>
+              <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
@@ -136,8 +132,10 @@
               Bu işlemi yapmak istediğinize emin misiniz?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button>
-              <button type="button" class="btn btn-primary" id="confirmButton">Evet</button>
+              <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Hayır</button>
+              <button type="button" class="btn btn-primary"
+                id="confirmButton">Evet</button>
             </div>
           </div>
         </div>
@@ -155,12 +153,15 @@
       {% endif %}
       {% endwith %}
     </div>
-    
+
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>
       document.getElementById('linkedinButton').addEventListener('click', function() {
         $('#confirmationModal').modal('show');
@@ -190,6 +191,12 @@
           eyeIcon.classList.add('fa-eye-slash');
         }
       });
+
+      document.getElementById('deleteAccountButton').addEventListener('click', function() {
+                if (confirm('Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) {
+                    document.getElementById('deleteAccountForm').submit();
+                }
+            });
     </script>
   </body>
 </html>
