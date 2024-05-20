@@ -14,10 +14,73 @@
       media="screen">
     <link rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+      body {
+        background-color: #f7f9fc;
+        color: #34495e;
+      }
+      .navbar {
+        background-color: #2c3e50;
+      }
+      .navbar-brand, .nav-link, .btn-outline-light {
+        color: #ecf0f1 !important;
+      }
+      .navbar-nav .nav-item .nav-link:hover {
+        color: #bdc3c7 !important;
+      }
+      .btn-primary {
+        background-color: #2980b9;
+        border-color: #2980b9;
+      }
+      .btn-primary:hover {
+        background-color: #1c6690;
+        border-color: #1c6690;
+      }
+      .btn-danger {
+        background-color: #e74c3c;
+        border-color: #e74c3c;
+      }
+      .btn-danger:hover {
+        background-color: #c0392b;
+        border-color: #c0392b;
+      }
+      .list-group-item {
+        background-color: #ffffff;
+        border: 1px solid #dddddd;
+      }
+      .form-control {
+        border-radius: 0.25rem;
+        border: 1px solid #dddddd;
+      }
+      .form-container {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+      .modal-content {
+        background-color: #ffffff;
+      }
+      .modal-header, .modal-footer {
+        border: none;
+      }
+      .modal-title {
+        color: #e67e22;
+      }
+      .alert-info {
+        background-color: #d9edf7;
+        border-color: #bce8f1;
+        color: #31708f;
+      }
+      .eyeIcon1, .eyeIcon2 {
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <a class="navbar-brand" href="#">Dashboard</a>
       <button
         class="navbar-toggler"
@@ -32,10 +95,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link">{{ user.name }} {{ user.surname }}</a>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-light" href="/logout"
+            <a class="btn btn-outline-light ml-2" href="/logout"
               type="submit">Logout</a>
           </li>
         </ul>
@@ -43,7 +109,7 @@
     </nav>
 
     <!-- Main Container -->
-    <div class="container">
+    <div class="container mt-4">
       <h1 class="text-center">Welcome to Your Dashboard</h1>
       <h2 class="text-center">User Information:</h2>
       <div class="row justify-content-center">
@@ -56,7 +122,7 @@
         </div>
       </div>
 
-      <div class="form-container">
+      <div class="form-container mt-4">
         <form action="/change_password" method="post" class="form-group">
           <label for="new_password">Enter New Password:</label>
           <div class="password-container">
@@ -67,11 +133,11 @@
               class="form-control"
               placeholder="Current Password"
               required />
-            <span class="toggle-password">
-              <i class="fas fa-eye" id="eyeIcon"></i>
+            <span class="toggle-password1">
+              <i class="fas eyeIcon1 fa-eye"></i>
             </span>
           </div>
-          <div class="password-container">
+          <div class="password-container mt-2">
             <input
               type="password"
               id="new_password"
@@ -79,16 +145,15 @@
               class="form-control"
               placeholder="New Password"
               required />
-            <span class="toggle-password">
-              <i class="fas fa-eye" id="eyeIcon"></i>
+            <span class="toggle-password2">
+              <i class="fas eyeIcon2 fa-eye"></i>
             </span>
           </div>
-          <button type="submit" class="btn btn-primary mt-2">Reset
-            Password</button>
+          <button type="submit" class="btn btn-primary mt-2">Reset Password</button>
         </form>
       </div>
 
-      <div class="form-container">
+      <div class="form-container mt-4">
         <form action="/change_email" method="post" class="form-group">
           <label for="new_email">Enter New Email:</label>
           <input
@@ -98,12 +163,11 @@
             class="form-control"
             placeholder="New Email"
             required />
-          <button type="submit" class="btn btn-primary mt-2">Change
-            Email</button>
+          <button type="submit" class="btn btn-primary mt-2">Change Email</button>
         </form>
       </div>
 
-      <div class="center-buttons">
+      <div class="center-buttons mt-4">
         <button type="button" class="btn btn-primary mt-2" id="linkedinButton">
           <img src="static/images/signin-with-linkedin-button.png"
             alt="LinkedIn"
@@ -121,15 +185,14 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="confirmationModalLabel">Emin
-                misiniz?</h5>
+              <h5 class="modal-title" id="confirmationModalLabel">UYARI!</h5>
               <button type="button" class="close" data-dismiss="modal"
                 aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              Bu işlemi yapmak istediğinize emin misiniz?
+              Hesabınızı silmek üzeresiniz, onaylıyor musunuz?
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary"
@@ -172,31 +235,28 @@
       });
 
       document.getElementById('confirmButton').addEventListener('click', function() {
-        // Add your form submission or action logic here
+        document.getElementById('deleteAccountForm').submit();
         $('#confirmationModal').modal('hide');
       });
 
-      const togglePassword = document.querySelector('.toggle-password');
-      const passwordInput = document.getElementById('new_password');
-      const eyeIcon = document.getElementById('eye-icon');
+      const togglePassword1 = document.querySelector('.toggle-password1');
+      const togglePassword2 = document.querySelector('.toggle-password2');
+      const passwordInput1 = document.getElementById('old_password');
+      const passwordInput2 = document.getElementById('new_password');
 
-      togglePassword.addEventListener('click', function() {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        if (type === 'password') {
-          eyeIcon.classList.remove('fa-eye-slash');
-          eyeIcon.classList.add('fa-eye');
-        } else {
-          eyeIcon.classList.remove('fa-eye');
-          eyeIcon.classList.add('fa-eye-slash');
-        }
+      togglePassword1.addEventListener('click', function() {
+        const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput1.setAttribute('type', type);
+        document.querySelector('.eyeIcon1').classList.toggle('fa-eye-slash');
+        document.querySelector('.eyeIcon1').classList.toggle('fa-eye');
       });
 
-      document.getElementById('deleteAccountButton').addEventListener('click', function() {
-                if (confirm('Hesabınızı silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.')) {
-                    document.getElementById('deleteAccountForm').submit();
-                }
-            });
+      togglePassword2.addEventListener('click', function() {
+        const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput2.setAttribute('type', type);
+        document.querySelector('.eyeIcon2').classList.toggle('fa-eye-slash');
+        document.querySelector('.eyeIcon2').classList.toggle('fa-eye');
+      });
     </script>
   </body>
 </html>
