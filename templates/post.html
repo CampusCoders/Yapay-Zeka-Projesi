@@ -8,27 +8,30 @@
     <!-- Bootstrap CSS -->
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+      rel="stylesheet" />
     <style>
-      body {
-        font-family: 'Roboto', sans-serif;
-        background-color: #f8f9fa;
-      }
-      .container {
-        margin-top: 50px;
-      }
-      .post-content {
-        background: white;
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      h1 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-      }
-    </style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .post-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
   </head>
   <body>
     <div class="container">
@@ -38,11 +41,33 @@
           {{ post_content | safe }}
         </div>
       </div>
+      <div class="button-container">
+        <form action="/createEventFromIndex" method="post">
+          <button type="submit" class="btn btn-primary"
+            name="create_event_button2">Yeniden Oluştur</button>
+        </form>
+        <form action="{{ url_for('index') }}" method="get" class="mt-2">
+          <button type="submit" class="btn btn-primary">Ana Sayfa</button>
+        </form>
+      </div>
     </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-info mt-3">
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+    {% endwith %}
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

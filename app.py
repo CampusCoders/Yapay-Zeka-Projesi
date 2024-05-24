@@ -13,12 +13,13 @@ app.register_blueprint(dashboard)
 
 app.register_blueprint(create_event)
 
+
 @app.route('/')
 def index():
     if 'user_id' in session:
         return redirect(url_for('login_or_signup.logged'))
     else:
-        return render_template('index.html')
-
+        return render_template('welcome.html')
+    
 if __name__ == '__main__':
     app.run(debug=True)

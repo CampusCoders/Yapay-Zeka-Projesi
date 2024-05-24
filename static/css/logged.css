@@ -1,4 +1,4 @@
- .u-section-1 {
+.u-section-1 {
   background-image: url("../images/top-bc.jpg");
   background-position: 50% 50%;
 }
@@ -12,7 +12,7 @@
   background-image: none;
   font-size: 1rem;
   font-weight: 700;
-  box-shadow: 0px 0px 8px 0px rgba(128,128,128,1);
+  box-shadow: 0px 0px 8px 0px rgba(128, 128, 128, 1);
   margin: 724px auto 60px;
   padding: 8px 24px 8px 22px;
 }
@@ -44,8 +44,14 @@
   .u-section-1 .u-sheet-1 {
     min-height: 274px;
   }
-} .u-section-2 {
-  background-image: linear-gradient(0deg, rgba(35,35,45,0.85), rgba(35,35,45,0.85)), url('../images/tantm-bc.jpg');
+}
+.u-section-2 {
+  background-image: linear-gradient(
+      0deg,
+      rgba(35, 35, 45, 0.85),
+      rgba(35, 35, 45, 0.85)
+    ),
+    url("../images/tantm-bc.jpg");
 }
 
 .u-section-2 .u-sheet-1 {
@@ -65,8 +71,8 @@
 
 .u-section-2 .u-list-item-1 {
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   --animation-custom_in-translate_x: -300px;
   --animation-custom_in-translate_y: 0px;
   --animation-custom_in-opacity: 0;
@@ -83,16 +89,16 @@
 
 .u-section-2 .u-text-1 {
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   font-weight: 700;
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 0;
 }
 
 .u-section-2 .u-text-2 {
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   transition-duration: 0.5s;
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 13px 0 0;
@@ -106,8 +112,8 @@
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 300px;
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 264px 75px 0 0;
   padding: 5px 0 6px;
@@ -115,8 +121,8 @@
 
 .u-section-2 .u-list-item-2 {
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 300px;
   --animation-custom_in-opacity: 0;
@@ -133,8 +139,8 @@
 
 .u-section-2 .u-text-3 {
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   font-weight: 700;
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 0;
@@ -143,8 +149,8 @@
 .u-section-2 .u-text-4 {
   font-weight: 400;
   font-style: normal;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   transition-duration: 0.5s;
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 13px 0 0;
@@ -158,8 +164,8 @@
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 300px;
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 264px 75px 0 0;
   padding: 5px 0 6px;
@@ -167,8 +173,8 @@
 
 .u-section-2 .u-list-item-3 {
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 0px;
   --animation-custom_in-opacity: 0;
@@ -185,8 +191,8 @@
 
 .u-section-2 .u-text-5 {
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   font-weight: 700;
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 0;
@@ -195,8 +201,8 @@
 .u-section-2 .u-text-6 {
   font-weight: 400;
   font-style: normal;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   transition-duration: 0.5s;
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 13px 0 0;
@@ -210,8 +216,8 @@
   --animation-custom_in-translate_x: 0px;
   --animation-custom_in-translate_y: 300px;
   transition-duration: 0.5s;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0);
-  text-shadow: 0px 0px 0px rgba(0,0,0,0);
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
   transform: translateX(0px) translateY(0px) scale(1) rotate(0deg);
   margin: 264px 75px 0 0;
   padding: 5px 0 6px;
@@ -230,7 +236,7 @@
 }
 
 @media (max-width: 1199px) {
-   .u-section-2 {
+  .u-section-2 {
     background-position: 50% 50%;
     background-size: auto 145%;
   }
@@ -324,7 +330,12 @@
 .u-section-2 .u-list-item-1,
 .u-section-2 .u-list-item-1:before,
 .u-section-2 .u-list-item-1 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-list-item-1 {
@@ -332,7 +343,10 @@
   opacity: 1 !important;
 }
 
-.u-container-layout:hover > .u-section-2 .u-list-item-1 > .u-container-layout:before {
+.u-container-layout:hover
+  > .u-section-2
+  .u-list-item-1
+  > .u-container-layout:before {
   opacity: 1 !important;
 }
 
@@ -344,7 +358,12 @@
 .u-section-2 .u-list-item-2,
 .u-section-2 .u-list-item-2:before,
 .u-section-2 .u-list-item-2 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-list-item-2 {
@@ -352,7 +371,10 @@
   opacity: 1 !important;
 }
 
-.u-container-layout:hover > .u-section-2 .u-list-item-2 > .u-container-layout:before {
+.u-container-layout:hover
+  > .u-section-2
+  .u-list-item-2
+  > .u-container-layout:before {
   opacity: 1 !important;
 }
 
@@ -364,7 +386,12 @@
 .u-section-2 .u-list-item-3,
 .u-section-2 .u-list-item-3:before,
 .u-section-2 .u-list-item-3 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-list-item-3 {
@@ -372,7 +399,10 @@
   opacity: 1 !important;
 }
 
-.u-container-layout:hover > .u-section-2 .u-list-item-3 > .u-container-layout:before {
+.u-container-layout:hover
+  > .u-section-2
+  .u-list-item-3
+  > .u-container-layout:before {
   opacity: 1 !important;
 }
 
@@ -384,13 +414,18 @@
 .u-section-2 .u-text-1,
 .u-section-2 .u-text-1:before,
 .u-section-2 .u-text-1 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-text-1 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-1 {
@@ -399,8 +434,8 @@
 
 .u-container-layout.hover > .u-section-2 .u-text-1 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-1 {
@@ -410,13 +445,18 @@
 .u-section-2 .u-text-3,
 .u-section-2 .u-text-3:before,
 .u-section-2 .u-text-3 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-text-3 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-3 {
@@ -425,8 +465,8 @@
 
 .u-container-layout.hover > .u-section-2 .u-text-3 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-3 {
@@ -436,13 +476,18 @@
 .u-section-2 .u-text-5,
 .u-section-2 .u-text-5:before,
 .u-section-2 .u-text-5 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-text-5 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-5 {
@@ -451,8 +496,8 @@
 
 .u-container-layout.hover > .u-section-2 .u-text-5 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-5 {
@@ -462,13 +507,18 @@
 .u-section-2 .u-text-2,
 .u-section-2 .u-text-2:before,
 .u-section-2 .u-text-2 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-text-2 {
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-2 {
@@ -476,9 +526,9 @@
 }
 
 .u-container-layout.hover > .u-section-2 .u-text-2 {
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-2 {
@@ -488,13 +538,18 @@
 .u-section-2 .u-text-4,
 .u-section-2 .u-text-4:before,
 .u-section-2 .u-text-4 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-text-4 {
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-4 {
@@ -502,9 +557,9 @@
 }
 
 .u-container-layout.hover > .u-section-2 .u-text-4 {
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-4 {
@@ -514,13 +569,18 @@
 .u-section-2 .u-text-6,
 .u-section-2 .u-text-6:before,
 .u-section-2 .u-text-6 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-text-6 {
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-6 {
@@ -528,9 +588,9 @@
 }
 
 .u-container-layout.hover > .u-section-2 .u-text-6 {
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-text-6 {
@@ -540,13 +600,18 @@
 .u-section-2 .u-btn-1,
 .u-section-2 .u-btn-1:before,
 .u-section-2 .u-btn-1 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-btn-1 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-container-layout:hover > .u-section-2 .u-btn-1:before {
@@ -555,20 +620,25 @@
 
 .u-container-layout.hover > .u-section-2 .u-btn-1 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-btn-2,
 .u-section-2 .u-btn-2:before,
 .u-section-2 .u-btn-2 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-btn-2 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-container-layout:hover > .u-section-2 .u-btn-2:before {
@@ -577,20 +647,25 @@
 
 .u-container-layout.hover > .u-section-2 .u-btn-2 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-section-2 .u-btn-3,
 .u-section-2 .u-btn-3:before,
 .u-section-2 .u-btn-3 > .u-container-layout:before {
-  transition-property: fill, color, background-color, stroke-width, border-style, border-width, border-top-width, border-left-width, border-right-width, border-bottom-width, custom-border, borders, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-image, image-zoom, background-size, background-position;
+  transition-property: fill, color, background-color, stroke-width, border-style,
+    border-width, border-top-width, border-left-width, border-right-width,
+    border-bottom-width, custom-border, borders, box-shadow, text-shadow,
+    opacity, border-radius, stroke, border-color, font-size, font-style,
+    font-weight, text-decoration, letter-spacing, transform, background-image,
+    image-zoom, background-size, background-position;
 }
 
 .u-container-layout:hover > .u-section-2 .u-btn-3 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
 }
 
 .u-container-layout:hover > .u-section-2 .u-btn-3:before {
@@ -599,10 +674,16 @@
 
 .u-container-layout.hover > .u-section-2 .u-btn-3 {
   transform: translateX(0px) translateY(-5px) scale(1) !important;
-  box-shadow: 0px 0px 0px  rgba(0,0,0,0) !important;
-  text-shadow: 0px 0px 0px rgba(0,0,0,0) !important;
-} .u-section-3 {
-  background-image: linear-gradient(0deg, rgba(35,35,45,0.6), rgba(35,35,45,0.6)), url('../images/ol-bc.jpg');
+  box-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+  text-shadow: 0px 0px 0px rgba(0, 0, 0, 0) !important;
+}
+.u-section-3 {
+  background-image: linear-gradient(
+      0deg,
+      rgba(35, 35, 45, 0.6),
+      rgba(35, 35, 45, 0.6)
+    ),
+    url("../images/ol-bc.jpg");
 }
 
 .u-section-3 .u-sheet-1 {
@@ -611,7 +692,7 @@
 
 .u-section-3 .u-form-1 {
   height: 1317px;
-  box-shadow: 0px 0px 40px 6px rgba(86,85,94,0.6);
+  box-shadow: 0px 0px 40px 6px rgba(86, 85, 94, 0.6);
   width: 900px;
   --radius: 20px;
   margin: 30px auto 27px;
@@ -667,7 +748,7 @@
 }
 
 @media (max-width: 1199px) {
-   .u-section-3 {
+  .u-section-3 {
     background-position: 50% 50%;
   }
 
@@ -692,8 +773,14 @@
   .u-section-3 .u-form-1 {
     width: 340px;
   }
-} .u-section-4 {
-  background-image: linear-gradient(0deg, rgba(35,35,45,0.7), rgba(35,35,45,0.7)), url('../images/fdrt.jpg');
+}
+.u-section-4 {
+  background-image: linear-gradient(
+      0deg,
+      rgba(35, 35, 45, 0.7),
+      rgba(35, 35, 45, 0.7)
+    ),
+    url("../images/fdrt.jpg");
   background-position: 50% 50%;
 }
 
@@ -864,8 +951,14 @@
   .u-section-4 .u-sheet-1 {
     min-height: 131px;
   }
-} .u-section-5 {
-  background-image: linear-gradient(0deg, rgba(35,35,45,0.5), rgba(35,35,45,0.5)), url('../images/gorsel3.jpg');
+}
+.u-section-5 {
+  background-image: linear-gradient(
+      0deg,
+      rgba(35, 35, 45, 0.5),
+      rgba(35, 35, 45, 0.5)
+    ),
+    url("../images/gorsel3.jpg");
   background-position: 50% 50%;
 }
 
@@ -982,7 +1075,7 @@
 }
 
 @media (max-width: 1199px) {
-   .u-section-5 {
+  .u-section-5 {
     background-size: 115%;
   }
 
@@ -1089,10 +1182,6 @@
     font-size: 3rem;
   }
 }
-
-
-
-
 
 .user-menu {
   position: relative;

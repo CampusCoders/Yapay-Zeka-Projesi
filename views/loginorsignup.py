@@ -28,9 +28,7 @@ db = firebase.database()
 @login_or_signup.route('/loginorsignup')
 def login_or_signup_home():
     if 'user_id' in session:
-        user_id = session['user_id']
-        user_data = db.child('Users').child(user_id).get().val()
-        return render_template('logged.html', user=user_data)
+        return redirect(url_for('login_or_signup.logged'))
     else:
        form_type = request.args.get('form', 'login')
        return render_template('login_or_signup.html', form_type=form_type)
@@ -42,25 +40,14 @@ def login():
     
     try:
         user = auth.sign_in_with_email_and_password(email, password)
-        user_id = user['localId']
-
-        user_data = db.child('Users').child(user_id).get().val()
-        if user_data is None:
-            print('Bu kullanıcı mevcut değil.', 'error')
-            return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
-        
-        if user_data['password'] != password or user_data['email'] != email:
-            print('Giriş başarısız. Bilgilerinizi kontrol edin.', 'error')
-            return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
-                            
+        user_id = user['localId']                    
         session['user_id'] = user_id
         return redirect(url_for('login_or_signup.logged'))
-
-    except Exception as e:
-        error_message = str(e)
-        print(f"Login failed: {error_message}")
-        flash('Giriş başarısız. Bilgilerinizi kontrol edin.', 'error')
+    
+    except:
+        flash('Giriş başarısız. Lütfen bilgilerinizi kontrol edin.', 'error')
         return redirect(url_for('login_or_signup.login_or_signup_home', form='login'))
+
 
 @login_or_signup.route('/signup', methods=['POST'])
 def register():
@@ -77,7 +64,6 @@ def register():
             flash('Parolalar eşleşmiyor.', 'error')
         return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
 
-    
     try:
         user = auth.create_user_with_email_and_password(email=email, password=password)
         user_id = user['localId']
@@ -123,12 +109,12 @@ def register():
         flash('Kullanıcı kaydı başarısız. Bu e-posta adresi zaten kullanılıyor.', 'error')
         return redirect(url_for('login_or_signup.login_or_signup_home', form='signup'))
 
-@login_or_signup.route('/logged')
+@login_or_signup.route('/index')
 def logged():
     if 'user_id' in session:
         user_id = session['user_id']
         user_data = db.child('Users').child(user_id).get().val()
-        return render_template('logged.html', user=user_data)
+        return render_template('index.html', user=user_data)
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
 
