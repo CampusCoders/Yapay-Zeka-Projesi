@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template, Blueprint, url_for, redirect, session, flash
 from api_ChatGPT import interface
 from views.loginorsignup import db, auth2, auth
+from datetime import datetime
 
 create_event = Blueprint('create_event', import_name=__name__, template_folder='templates')
 
@@ -59,6 +60,16 @@ def create_event_from_API():
 
         daily_rights = user_data['daily_rights']
         db.child('Users').child(user_id).update({'daily_rights': daily_rights -1 })
+
+        create_date = datetime.now().strftime("%b %d, %Y at %H:%M:%S UTC+3")
+        post_data = {
+            'content': post_content,
+            'shared_with': "none",
+            'created_at': create_date,
+            'user_id': user_id
+        }
+
+        db.child('Events').push(post_data)
 
         return redirect(url_for('create_event.event_created'))
 

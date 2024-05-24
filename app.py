@@ -2,6 +2,7 @@ from flask import Flask, render_template, session, redirect, url_for
 from views.loginorsignup import login_or_signup
 from views.createEvent import create_event
 from views.dashboard import dashboard
+from views.user_posts import user_posts
 import secrets
 
 app = Flask(__name__)
@@ -12,6 +13,8 @@ app.register_blueprint(login_or_signup)
 app.register_blueprint(dashboard)
 
 app.register_blueprint(create_event)
+
+app.register_blueprint(user_posts)
 
 
 @app.route('/')

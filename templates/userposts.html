@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Posts</title>
+        <style>
+      .content {
+        display: none;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .post.open .content {
+        display: block;
+      }
+    </style>
+        <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const posts = document.querySelectorAll(".post");
+
+        posts.forEach(function (post) {
+          post.addEventListener("click", function () {
+            this.classList.toggle("open");
+          });
+        });
+      });
+    </script>
+    </head>
+    <body>
+        <h1>My Posts</h1>
+        {% if user_posts %}
+        <ul>
+            {% for key, post in user_posts.items() %}
+            <li class="post">
+                <p><strong>Created at: {{ post.created_at }} </strong></p>
+                <div class="content">
+                    <p>{{ post.content | safe }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No posts found.</p>
+        {% endif %}
+    </body>
+</html>
