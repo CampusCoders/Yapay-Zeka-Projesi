@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -11,21 +12,18 @@
       rel="stylesheet" />
     <link rel="stylesheet"
       href="{{ url_for('static', filename='css/dashboard.css') }}"
-      media="screen">
+      media="screen" />
     <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   </head>
+
   <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
       <a class="navbar-brand" href="#">Dashboard</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
         data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
+        aria-controls="navbarNav" aria-expanded="false"
         aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -65,67 +63,65 @@
       </div>
 
       <div class="form-container mt-4">
-        <form action="/change_password" method="post" class="form-group">
+        <form action="/changePassword" method="post" class="form-group">
           <label for="new_password">Enter New Password:</label>
           <div class="password-container">
-            <input
-              type="password"
-              id="old_password"
-              name="old_password"
+            <input type="password" id="old_password" name="old_password"
               class="form-control"
-              placeholder="Current Password"
-              required />
+              placeholder="Current Password" required />
             <span class="toggle-password1">
               <i class="fas eyeIcon1 fa-eye"></i>
             </span>
           </div>
           <div class="password-container mt-2">
-            <input
-              type="password"
-              id="new_password"
-              name="new_password"
-              class="form-control"
-              placeholder="New Password"
+            <input type="password" id="new_password" name="new_password"
+              class="form-control" placeholder="New Password"
               required />
             <span class="toggle-password2">
               <i class="fas eyeIcon2 fa-eye"></i>
             </span>
           </div>
-          <button type="submit" class="btn btn-primary mt-2">Reset
-            Password</button>
+          <button type="submit" class="btn btn-primary mt-2">
+            Reset Password
+          </button>
         </form>
       </div>
 
       <div class="form-container mt-4">
-        <form action="/change_email" method="post" class="form-group">
+        <form action="/changeEmail" method="post" class="form-group">
           <label for="new_email">Enter New Email:</label>
-          <input
-            type="email"
-            id="new_email"
-            name="new_email"
-            class="form-control"
-            placeholder="New Email"
-            required />
-          <button type="submit" class="btn btn-primary mt-2">Change
-            Email</button>
+          <input type="email" id="new_email" name="new_email"
+            class="form-control" placeholder="New Email" required />
+          <button type="submit" class="btn btn-primary mt-2">
+            Change Email
+          </button>
         </form>
       </div>
 
       <div class="center-buttons mt-4">
+        {% if linkedin_token %}
+        <p style="color: green; margin-top: 20px; margin-right: 20px;">Your
+          LinkedIn account is connected.</p>
+        {% else %}
         <button type="button" class="btn btn-primary mt-2" id="linkedinButton">
           <img src="static/images/signin-with-linkedin-button.png"
-            alt="LinkedIn"
-            style="width: auto; height: auto;">
+            alt="LinkedIn" style="width: auto; height: auto" />
         </button>
+        <form id="linkedinForm" action="/linkedinAuth" method="POST"
+          style="display: none"></form>
+        {% endif %}
         <button type="button" class="btn btn-danger mt-2"
-          id="deleteAccountButton">Hesabı sil</button>
-        <form id="deleteAccountForm" action="/delete_user" method="POST"
-          style="display:none;"></form>
+          id="deleteAccountButton">
+          Hesabı sil
+        </button>
+        <form id="deleteAccountForm" action="/deleteUser" method="POST"
+          style="display: none"></form>
       </div>
 
       <!-- Pop-up Modal -->
       <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
-        aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -136,20 +132,21 @@
               </button>
             </div>
             <div class="modal-body">
-              Hesabınızı silmek üzeresiniz, onaylıyor musunuz?
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary"
-                data-dismiss="modal">Hayır</button>
-              <button type="button" class="btn btn-primary"
-                id="confirmButton">Evet</button>
+                data-dismiss="modal">
+                Hayır
+              </button>
+              <button type="button" class="btn btn-primary" id="confirmButton">
+                Evet
+              </button>
             </div>
           </div>
         </div>
       </div>
 
-      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+      {% with messages = get_flashed_messages() %} {% if messages %}
       <div class="alert alert-info mt-3">
         <ul>
           {% for message in messages %}
@@ -157,8 +154,7 @@
           {% endfor %}
         </ul>
       </div>
-      {% endif %}
-      {% endwith %}
+      {% endif %} {% endwith %}
     </div>
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
@@ -170,37 +166,63 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>
-      document.getElementById('linkedinButton').addEventListener('click', function() {
-        $('#confirmationModal').modal('show');
+    document
+      .getElementById("linkedinButton")
+      .addEventListener("click", function () {
+        $("#confirmationModal").modal("show");
+        $("#confirmButton").attr("data-button-id", "linkedinButton");
+        $("#confirmationModal .modal-body").text(
+          "LinkedIn hesabınızı bağlamak istiyorsunuz, onaylıyor musunuz?"
+        );
       });
 
-      document.getElementById('deleteAccountButton').addEventListener('click', function() {
-        $('#confirmationModal').modal('show');
+    document
+      .getElementById("deleteAccountButton")
+      .addEventListener("click", function () {
+        $("#confirmationModal").modal("show");
+        $("#confirmButton").attr("data-button-id", "deleteButton");
+        $("#confirmationModal .modal-body").text(
+          "Hesabınızı silmek üzeresiniz, onaylıyor musunuz?"
+        );
       });
 
-      document.getElementById('confirmButton').addEventListener('click', function() {
-        document.getElementById('deleteAccountForm').submit();
-        $('#confirmationModal').modal('hide');
+    document
+      .getElementById("confirmButton")
+      .addEventListener("click", function () {
+        var buttonId = $(this).attr("data-button-id");
+        if (buttonId === "linkedinButton") {
+          document.getElementById("linkedinForm").submit();
+        } else if (buttonId === "deleteButton") {
+          document.getElementById("deleteAccountForm").submit();
+        }
+        $("#confirmationModal").modal("hide");
       });
 
-      const togglePassword1 = document.querySelector('.toggle-password1');
-      const togglePassword2 = document.querySelector('.toggle-password2');
-      const passwordInput1 = document.getElementById('old_password');
-      const passwordInput2 = document.getElementById('new_password');
+    const togglePassword1 = document.querySelector(".toggle-password1");
+    const togglePassword2 = document.querySelector(".toggle-password2");
+    const passwordInput1 = document.getElementById("old_password");
+    const passwordInput2 = document.getElementById("new_password");
 
-      togglePassword1.addEventListener('click', function() {
-        const type = passwordInput1.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput1.setAttribute('type', type);
-        document.querySelector('.eyeIcon1').classList.toggle('fa-eye-slash');
-        document.querySelector('.eyeIcon1').classList.toggle('fa-eye');
-      });
+    togglePassword1.addEventListener("click", function () {
+      const type =
+        passwordInput1.getAttribute("type") === "password"
+          ? "text"
+          : "password";
+      passwordInput1.setAttribute("type", type);
+      document.querySelector(".eyeIcon1").classList.toggle("fa-eye-slash");
+      document.querySelector(".eyeIcon1").classList.toggle("fa-eye");
+    });
 
-      togglePassword2.addEventListener('click', function() {
-        const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput2.setAttribute('type', type);
-        document.querySelector('.eyeIcon2').classList.toggle('fa-eye-slash');
-        document.querySelector('.eyeIcon2').classList.toggle('fa-eye');
-      });
-    </script>
+    togglePassword2.addEventListener("click", function () {
+      const type =
+        passwordInput2.getAttribute("type") === "password"
+          ? "text"
+          : "password";
+      passwordInput2.setAttribute("type", type);
+      document.querySelector(".eyeIcon2").classList.toggle("fa-eye-slash");
+      document.querySelector(".eyeIcon2").classList.toggle("fa-eye");
+    });
+  </script>
   </body>
+
 </html>

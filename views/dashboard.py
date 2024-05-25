@@ -8,11 +8,12 @@ def user_dashboard():
     if 'user_id' in session:
         user_id = session['user_id']
         user_data = db.child('Users').child(user_id).get().val()
-        return render_template('dashboard.html', user=user_data)
+        linkedin_token = user_data.get('linkedin_access_token')
+        return render_template('dashboard.html', user=user_data, linkedin_token=linkedin_token)
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
     
-@dashboard.route('/change_password', methods=['POST'])
+@dashboard.route('/changePassword', methods=['POST'])
 def reset_password():
     if 'user_id' in session:
         user_id = session['user_id']
@@ -40,7 +41,7 @@ def reset_password():
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
     
-@dashboard.route('/change_email', methods=['POST'])
+@dashboard.route('/changeEmail', methods=['POST'])
 def change_email():
     if 'user_id' in session:
         user_id = session['user_id']
@@ -57,7 +58,7 @@ def change_email():
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
     
-@dashboard.route('/delete_user', methods=['POST'])
+@dashboard.route('/deleteUser', methods=['POST'])
 def delete_user():
     if 'user_id' in session:
         user_id = session['user_id']
