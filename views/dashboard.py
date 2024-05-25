@@ -65,6 +65,10 @@ def delete_user():
             auth2.delete_user(user_id)
 
             db.child('Users').child(user_id).remove()
+            user_events = db.child('Events').order_by_child('user_id').equal_to(user_id).get().val()
+            if user_events:
+                for event_key in user_events:
+                    db.child('Events').child(event_key).remove()
             
             auth.current_user = None
             session.clear()

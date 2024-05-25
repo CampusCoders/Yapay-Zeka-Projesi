@@ -1,11 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>My Posts</title>
-        <style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Posts</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+      media="screen" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
       .content {
         display: none;
         background: white;
@@ -17,33 +28,134 @@
         display: block;
       }
     </style>
-        <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const posts = document.querySelectorAll(".post");
+  </head>
+  <body>
+    <h1>My Posts</h1>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div class="alert alert-info mt-3">
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %} {% endwith %} {% if user_posts %}
+    <ul>
+      {% for key, post in user_posts.items() %}
+      <li class="post">
+        <p><strong>Created at: {{ post.created_at }} </strong></p>
+        <div class="content">
+          <p>{{ post.content | safe }}</p>
+          <button
+            type="button"
+            class="btn btn-primary mt-2 linkedinButton"
+            id="linkedinButton">
+            <img
+              src="static/images/signin-with-linkedin-button.png"
+              alt="LinkedIn"
+              style="width: auto; height: auto" />
+          </button>
+          <button
+            type="button"
+            class="btn btn-danger mt-2 deletePostButton"
+            data-postid="{{ key }}">
+            Postu sil
+          </button>
+          <form
+            id="deletePostForm"
+            action="/deletePost"
+            method="POST"
+            style="display: none"></form>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No posts found.</p>
+    {% endif %}
 
-        posts.forEach(function (post) {
-          post.addEventListener("click", function () {
-            this.classList.toggle("open");
-          });
+    <!-- Pop-up Modal -->
+    <div
+      class="modal fade"
+      id="confirmationModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="confirmationModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmationModalLabel">UYARI!</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Postunuzu silmek üzeresiniz, onaylıyor musunuz?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal">
+              Hayır
+            </button>
+            <button type="button" class="btn btn-primary" id="confirmButton">
+              Evet
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const posts = document.querySelectorAll(".post");
+
+      posts.forEach(function (post) {
+        post.addEventListener("click", function () {
+          this.classList.toggle("open");
         });
       });
-    </script>
-    </head>
-    <body>
-        <h1>My Posts</h1>
-        {% if user_posts %}
-        <ul>
-            {% for key, post in user_posts.items() %}
-            <li class="post">
-                <p><strong>Created at: {{ post.created_at }} </strong></p>
-                <div class="content">
-                    <p>{{ post.content | safe }}</p>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No posts found.</p>
-        {% endif %}
-    </body>
+
+      document.querySelectorAll(".deletePostButton").forEach((button) => {
+        button.addEventListener("click", function () {
+          var postId = this.getAttribute("data-postid");
+          $("#confirmationModal").modal("show");
+          $("#confirmButton").attr("data-postid", postId); // Silme işlemi için post ID'sini onay düğmesine ekleyin
+        });
+      });
+
+      document
+        .getElementById("confirmButton")
+        .addEventListener("click", function () {
+          var postId = this.getAttribute("data-postid");
+          fetch(`/deletePost/${postId}`, {
+            method: "POST",
+          }).then((response) => {
+            if (response.ok) {
+              // Başarılı bir şekilde silindiğinde yapılacak işlemler
+              console.log("Post successfully deleted!");
+              // Sayfayı yenileme veya silinen postu DOM'dan kaldırma işlemi yapabilirsiniz.
+              location.reload(); // Sayfayı yenileme örneği
+            } else {
+              // Silme başarısız olduğunda yapılacak işlemler
+              console.error("Failed to delete post!");
+            }
+          });
+        });
+    });
+  </script>
 </html>

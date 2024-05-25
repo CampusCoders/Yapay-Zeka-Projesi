@@ -11,3 +11,10 @@ def my_posts():
         return render_template('userposts.html', user_posts=user_posts)
     else:
         return render_template('userposts.html', user_posts=None)
+    
+@user_posts.route('/deletePost/<post_id>', methods=['POST'])
+def delete_post(post_id):
+    db.child('Events').child(post_id).remove()
+    print('Post successfully deleted!')
+    return redirect(url_for('user_posts.my_posts'))
+

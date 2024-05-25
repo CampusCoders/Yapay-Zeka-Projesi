@@ -2,7 +2,7 @@ from flask import Flask, render_template, session, redirect, url_for
 from views.loginorsignup import login_or_signup
 from views.createEvent import create_event
 from views.dashboard import dashboard
-from views.user_posts import user_posts
+from views.userPosts import user_posts
 import secrets
 
 app = Flask(__name__)

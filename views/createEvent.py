@@ -76,7 +76,13 @@ def create_event_from_API():
 
 @create_event.route('/event_created')
 def event_created():
-    post_content = session['post_content']
-    return render_template('post.html', post_content=post_content)
+    if 'user_id' in session:
+        user_id = session['user_id']
+        user_data = db.child('Users').child(user_id).get().val()
+        post_content = session['post_content']
+        return render_template('post.html', post_content=post_content, user=user_data)
+    else:
+        return redirect(url_for('login_or_signup.login_or_signup_home'))
+    
 
 
