@@ -1,10 +1,31 @@
 import requests
 import json
+from LinkedinAPI.linkedin_token_utils import credentials, read_creds
+import re
 
-def read_creds(filename):
-    with open(filename) as f:
-        credentials = json.load(f)
-    return credentials
+import re
+
+def format_linkedin_content(html_content):
+    # HTML etiketlerini LinkedIn'in desteklediği biçimlendirme ile değiştir
+    html_content = html_content.replace('<h2>', '**').replace('</h2>', '**\n')
+    html_content = html_content.replace('<h3>', '**').replace('</h3>', '**\n')
+    html_content = html_content.replace('<h4>', '**').replace('</h4>', '**\n')
+    html_content = html_content.replace('<p>', '').replace('</p>', '\n')
+    html_content = html_content.replace('<strong>', '**').replace('</strong>', '**')
+    html_content = html_content.replace('<b>', '**').replace('</b>', '**')
+    html_content = html_content.replace('<i>', '_').replace('</i>', '_')
+    html_content = html_content.replace('<em>', '_').replace('</em>', '_')
+    html_content = html_content.replace('<ul>', '').replace('</ul>', '')
+    html_content = html_content.replace('<li>', '- ').replace('</li>', '\n')
+    
+    # Diğer HTML etiketlerini düz metin olarak temizle
+    clean_text = re.sub('<[^<]+?>', '', html_content)
+    
+    # Birden fazla boşluğu ve satır sonlarını tek bir boşluk/satır sonu ile değiştir
+    clean_text = re.sub('\n\s*\n', '\n\n', clean_text)
+    clean_text = re.sub(' +', ' ', clean_text).strip()
+    
+    return clean_text
 
 def get_user_profile(access_token):
     url = 'https://api.linkedin.com/v2/userinfo'
@@ -16,7 +37,7 @@ def get_user_profile(access_token):
         print("Error:", response.text)
         return None
 
-def share_post(access_token, text_content):
+def share_post(access_token, text_content, user_sub):
     url = 'https://api.linkedin.com/v2/ugcPosts'
     headers = {
         'Authorization': 'Bearer ' + access_token,
@@ -55,22 +76,3 @@ def share_post(access_token, text_content):
     else:
         print("Error:", response.text)
         return None
-
-
-if __name__ == '__main__':
-
-    credentials = r"C:\Users\CAGRII\Desktop\Yapay-Zeka-Projesi\LinkedinAPI\credentials.json"
-    creds = read_creds(credentials)
-    access_token = creds['access_token']
-    
-    # Kullanıcı profili alınması
-    user_profile = get_user_profile(access_token)
-    user_sub= user_profile.get('sub', '')
-    if user_profile:
-        print("User Profile:", user_profile)
-    
-    # Örnek bir post paylaşımı
-    text_content="CAGRII POST TRY3"
-    share_result = share_post(access_token, text_content)
-    if share_result:
-        print("Post Shared:", share_result)

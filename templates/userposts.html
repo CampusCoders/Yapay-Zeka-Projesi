@@ -39,33 +39,34 @@
         {% endfor %}
       </ul>
     </div>
-    {% endif %} {% endwith %} {% if user_posts %}
+    {% endif %} {% endwith %}
+
+    {% if user_posts %}
     <ul>
       {% for key, post in user_posts.items() %}
       <li class="post">
         <p><strong>Created at: {{ post.created_at }} </strong></p>
         <div class="content">
           <p>{{ post.content | safe }}</p>
+          {% if linkedin_token %}
           <button
             type="button"
             class="btn btn-primary mt-2 linkedinButton"
-            id="linkedinButton">
+            id="linkedinButton{{ key }}"
+            data-postid="{{ key }}">
             <img
-              src="static/images/signin-with-linkedin-button.png"
+              src="static/images/share-on-linkedin.png"
               alt="LinkedIn"
               style="width: auto; height: auto" />
           </button>
+          {% endif %}
           <button
             type="button"
             class="btn btn-danger mt-2 deletePostButton"
+            id="deletePostButton{{ key }}"
             data-postid="{{ key }}">
             Postu sil
           </button>
-          <form
-            id="deletePostForm"
-            action="/deletePost"
-            method="POST"
-            style="display: none"></form>
         </div>
       </li>
       {% endfor %}
@@ -94,8 +95,8 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            Postunuzu silmek üzeresiniz, onaylıyor musunuz?
+          <div class="modal-body" id="confirmationMessage">
+            <!-- Confirmation message will be inserted here dynamically -->
           </div>
           <div class="modal-footer">
             <button
@@ -111,51 +112,77 @@
         </div>
       </div>
     </div>
-  </body>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script
-    src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const posts = document.querySelectorAll(".post");
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const posts = document.querySelectorAll(".post");
 
-      posts.forEach(function (post) {
-        post.addEventListener("click", function () {
-          this.classList.toggle("open");
-        });
-      });
-
-      document.querySelectorAll(".deletePostButton").forEach((button) => {
-        button.addEventListener("click", function () {
-          var postId = this.getAttribute("data-postid");
-          $("#confirmationModal").modal("show");
-          $("#confirmButton").attr("data-postid", postId); // Silme işlemi için post ID'sini onay düğmesine ekleyin
-        });
-      });
-
-      document
-        .getElementById("confirmButton")
-        .addEventListener("click", function () {
-          var postId = this.getAttribute("data-postid");
-          fetch(`/deletePost/${postId}`, {
-            method: "POST",
-          }).then((response) => {
-            if (response.ok) {
-              // Başarılı bir şekilde silindiğinde yapılacak işlemler
-              console.log("Post successfully deleted!");
-              // Sayfayı yenileme veya silinen postu DOM'dan kaldırma işlemi yapabilirsiniz.
-              location.reload(); // Sayfayı yenileme örneği
-            } else {
-              // Silme başarısız olduğunda yapılacak işlemler
-              console.error("Failed to delete post!");
-            }
+        posts.forEach(function (post) {
+          post.addEventListener("click", function () {
+            this.classList.toggle("open");
           });
         });
-    });
-  </script>
+
+        document
+          .querySelectorAll(".linkedinButton, .deletePostButton")
+          .forEach((button) => {
+            button.addEventListener("click", function (event) {
+              event.stopPropagation();
+              var postId = this.getAttribute("data-postid");
+              var buttonID = this.classList.contains("linkedinButton")
+                ? "linkedinButton"
+                : "deletePostButton";
+              var confirmationMessage =
+                buttonID === "linkedinButton"
+                  ? "LinkedIn'de paylaşmak istiyor musunuz?"
+                  : "Postunuzu silmek üzeresiniz, onaylıyor musunuz?";
+
+              $("#confirmationModal").modal("show");
+              $("#confirmationMessage").text(confirmationMessage);
+              $("#confirmButton").attr("data-postid", postId);
+              $("#confirmButton").attr("data-button-id", buttonID);
+            });
+          });
+
+        document
+          .getElementById("confirmButton")
+          .addEventListener("click", function () {
+            var postId = this.getAttribute("data-postid");
+            var buttonID = this.getAttribute("data-button-id");
+            if (buttonID === "linkedinButton") {
+              fetch(`/shareLinkedin/${postId}`, {
+                method: "POST",
+              }).then((response) => {
+                if (response.ok) {
+                  console.log("Post successfully shared!");
+                  location.reload();
+                } else {
+                  console.error("Failed to share post!");
+                }
+              });
+            } else if (buttonID === "deletePostButton") {
+              fetch(`/deletePost/${postId}`, {
+                method: "POST",
+              }).then((response) => {
+                if (response.ok) {
+                  console.log("Post successfully deleted!");
+                  location.reload();
+                } else {
+                  console.error("Failed to delete post!");
+                }
+              });
+            }
+          });
+      });
+    </script>
+  </body>
 </html>

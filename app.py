@@ -3,7 +3,7 @@ from views.loginorsignup import login_or_signup
 from views.createEvent import create_event
 from views.dashboard import dashboard
 from views.userPosts import user_posts
-from views.shareLinkedin import linkedin
+from views.linkedinToken import linkedinToken
 import secrets
 
 app = Flask(__name__)
@@ -17,7 +17,7 @@ app.register_blueprint(create_event)
 
 app.register_blueprint(user_posts)
 
-app.register_blueprint(linkedin)
+app.register_blueprint(linkedinToken)
 
 @app.route('/')
 def index():
