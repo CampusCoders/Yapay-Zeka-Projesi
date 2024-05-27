@@ -152,3 +152,14 @@
   z-index: 999;
   display: none;
 }
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px #25262a inset !important;
+  -webkit-text-fill-color: #d1d1d1 !important;
+}

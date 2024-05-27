@@ -11,16 +11,17 @@ def createEvent():
 
 @create_event.route('/createEventFromIndex', methods=['POST'])
 def create_event_from_API():
+        scroll_position = request.form.get('scrollPosition')
         user_id = session.get('user_id')
         user_data = db.child('Users').child(user_id).get().val()
 
         if user_data['daily_rights'] == 0 and 'create_event_button' in request.form:
             flash("Yetersiz hak!", "error")
-            return redirect(url_for('create_event.createEvent'))
+            return redirect(url_for('create_event.createEvent',scrollPosition=scroll_position))
         
         elif user_data['daily_rights'] == 0 and 'create_event_button2' in request.form:
             flash("Yetersiz hak!", "error")
-            return redirect(url_for('create_event.event_created'))
+            return redirect(url_for('create_event.event_created',scrollPosition=scroll_position))
 
         if 'event_name' not in session:  
             session['event_name'] = request.form['etkinlikAdi']
@@ -29,7 +30,7 @@ def create_event_from_API():
             session['event_target_audience'] = request.form['etkinlikHedefKitle']
             session['event_platform'] = request.form['etkinlikPlatformu']
             session['event_participants'] = request.form['etkinlikKatilimcilari']
-            session['event_hosts'] = request.form['etkinlikModeratörü']
+            session['event_hosts'] = request.form['etkinlikModeratoru']
             session['event_sponsors'] = request.form['etkinlikSponsorlari']
             session['event_tags'] = request.form['etkinlikSosyalMedyaTagleri']
             session['event_date_and_time'] = request.form['etkinlikTarihiVeSaati']
@@ -71,16 +72,17 @@ def create_event_from_API():
 
         db.child('Events').push(post_data)
 
-        return redirect(url_for('create_event.event_created'))
+        return redirect(url_for('create_event.event_created',scrollPosition=scroll_position))
 
 
 @create_event.route('/event_created')
 def event_created():
+    scroll_position = request.args.get('scrollPosition', 0)
     if 'user_id' in session:
         user_id = session['user_id']
         user_data = db.child('Users').child(user_id).get().val()
         post_content = session['post_content']
-        return render_template('post.html', post_content=post_content, user=user_data)
+        return render_template('post.html', post_content=post_content, user=user_data,scroll_position=scroll_position)
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
     

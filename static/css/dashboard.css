@@ -98,3 +98,13 @@ body {
 .eyeIcon2 {
   cursor: pointer;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(57,56,60,255) inset !important;
+  -webkit-text-fill-color: #d1d1d1 !important;
+}
