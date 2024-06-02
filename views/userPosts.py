@@ -47,3 +47,7 @@ def sharePost(post_id):
         print("Post Shared:", share_result) 
     return redirect(url_for('user_posts.my_posts'))
 
+@user_posts.route('/getPostDetails/<post_id>', methods=['GET'])
+def get_post_details(post_id):
+    user_post = db.child('Events').child(post_id).get().val()
+    return jsonify(user_post)
