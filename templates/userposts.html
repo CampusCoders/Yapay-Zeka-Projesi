@@ -1,37 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My Posts</title>
     <!-- Bootstrap CSS -->
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet">
-    <link rel="stylesheet"
+      rel="stylesheet" />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/dashboard.css') }}"
-      media="screen">
-    <link rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+      media="screen" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
-        .content {
-            display: none;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+      .content {
+        display: none;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
 
-        .post.open .content {
-            display: block;
-        }
+      .post.open .content {
+        display: block;
+      }
     </style>
   </head>
   <body>
+    <header
+      class="u-align-center-xs u-clearfix u-header u-clearfix u-sheet u-sheet-1"
+      id="sec-75b6">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="/index">
+          <img
+            style="width: 263px; height: 40px; margin: 10px auto 0 0"
+            class="u-image u-image-contain u-image-default u-image-1"
+            src="./static/images/namelogo.png"
+            alt
+            data-image-width="757"
+            data-image-height="114" />
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                href="/dashboard">{{ user.name }} {{ user.surname }}</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                href="/myPosts"
+                type="submit">Postlarım</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                style="color: rgb(185, 36, 36) !important"
+                href="/logout"
+                type="submit">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
     <h1>My Posts</h1>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
+    {% with messages = get_flashed_messages() %} {% if messages %}
     <div class="alert alert-info mt-3">
       <ul>
         {% for message in messages %}
@@ -39,33 +77,40 @@
         {% endfor %}
       </ul>
     </div>
-    {% endif %}
-    {% endwith %}
-
-    {% if user_posts %}
+    {% endif %} {% endwith %} {% if user_posts %}
     <ul>
       {% for key, post in user_posts.items() %}
       <li class="post">
         <p><strong>Created at: {{ post.created_at }} </strong></p>
         <div class="content">
           <p>{{ post.content | safe }}</p>
-          <button type="button" class="btn btn-primary mt-2"
+          <button
+            type="button"
+            class="btn btn-primary mt-2"
             id="linkedinShareButton{{ key }}"
             data-postid="{{ key }}">
             <img
               src="{{ url_for('static', filename='images/share-on-linkedin.png') }}"
-              alt="LinkedIn" style="width: auto; height: auto" />
+              alt="LinkedIn"
+              style="width: auto; height: auto" />
           </button>
-          <form id="linkedinShareForm{{ key }}"
+          <form
+            id="linkedinShareForm{{ key }}"
             action="/shareLinkedin/{{ key }}"
-            method="POST" style="display: none"></form>
-          <button type="button" class="btn btn-danger mt-2"
+            method="POST"
+            style="display: none"></form>
+          <button
+            type="button"
+            class="btn btn-danger mt-2"
             id="deletePostButton{{ key }}"
             data-postid="{{ key }}">
             Postu sil
           </button>
-          <form id="deletePostForm{{ key }}" action="/deletePost/{{ key }}"
-            method="POST" style="display: none"></form>
+          <form
+            id="deletePostForm{{ key }}"
+            action="/deletePost/{{ key }}"
+            method="POST"
+            style="display: none"></form>
         </div>
       </li>
       {% endfor %}
@@ -75,13 +120,21 @@
     {% endif %}
 
     <!-- Pop-up Modal -->
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
-      aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="confirmationModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="confirmationModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="confirmationModalLabel">UYARI!</h5>
-            <button type="button" class="close" data-dismiss="modal"
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
               aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -90,10 +143,15 @@
             <!-- Confirmation message will be inserted here dynamically -->
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary"
-              data-dismiss="modal">Hayır</button>
-            <button type="button" class="btn btn-primary"
-              id="confirmButton">Evet</button>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal">
+              Hayır
+            </button>
+            <button type="button" class="btn btn-primary" id="confirmButton">
+              Evet
+            </button>
           </div>
         </div>
       </div>
@@ -109,61 +167,64 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>
-    document.addEventListener("DOMContentLoaded", function () {
-    const posts = document.querySelectorAll(".post");
+          document.addEventListener("DOMContentLoaded", function () {
+          const posts = document.querySelectorAll(".post");
 
-    posts.forEach(function (post) {
-        post.addEventListener("click", function () {
-            this.classList.toggle("open");
-        });
-    });
+          posts.forEach(function (post) {
+              post.addEventListener("click", function () {
+                  this.classList.toggle("open");
+              });
+          });
 
-    document.querySelectorAll("[id^=linkedinShareButton], [id^=deletePostButton]").forEach((button) => {
-        button.addEventListener("click", function (event) {
-            event.stopPropagation();
-            var postId = this.getAttribute("data-postid");
-            var buttonID = this.getAttribute("id");
-            var confirmationMessage;
+          document.querySelectorAll("[id^=linkedinShareButton], [id^=deletePostButton]").forEach((button) => {
+              button.addEventListener("click", function (event) {
+                  event.stopPropagation();
+                  var postId = this.getAttribute("data-postid");
+                  var buttonID = this.getAttribute("id");
+                  var confirmationMessage;
 
-            {% if linkedin_token %}
-                if (buttonID.includes("linkedinShareButton")) {
-                    confirmationMessage = "Seçilen gönderiyi paylaşmak istiyor musunuz?";
-                } else if (buttonID.includes("deletePostButton")) {
-                    confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
-                }
-            {% else %}
-                confirmationMessage = "LinkedIn hesabınız bağlı değil.";
-            {% endif %}
+                  {% if linkedin_token %}
+                      if (buttonID.includes("linkedinShareButton")) {
+                          confirmationMessage = "Seçilen gönderiyi paylaşmak istiyor musunuz?";
+                      } else if (buttonID.includes("deletePostButton")) {
+                          confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
+                      }
+                  {% else %}
+                      if (buttonID.includes("linkedinShareButton")) {
+                          confirmationMessage = "Linkedin hesabınız bağlı değil bağlamak için 'Evet' butonuna basın.";
+                      } else if (buttonID.includes("deletePostButton")) {
+                          confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
+                      }
+                  {% endif %}
 
-            $("#confirmationModal").modal("show");
-            $("#confirmationMessage").text(confirmationMessage);
-            $("#confirmButton").attr("data-postid", postId);
-            $("#confirmButton").attr("data-button-id", buttonID);
-        });
-    });
+                  $("#confirmationModal").modal("show");
+                  $("#confirmationMessage").text(confirmationMessage);
+                  $("#confirmButton").attr("data-postid", postId);
+                  $("#confirmButton").attr("data-button-id", buttonID);
+              });
+          });
 
-    document.getElementById("confirmButton").addEventListener("click", function () {
-        var postId = this.getAttribute("data-postid");
-        var buttonID = this.getAttribute("data-button-id");
-        var formId;
+          document.getElementById("confirmButton").addEventListener("click", function () {
+              var postId = this.getAttribute("data-postid");
+              var buttonID = this.getAttribute("data-button-id");
+              var formId;
 
-        if (buttonID.includes("linkedinShareButton")) {
-            {% if linkedin_token %}
-                formId = "linkedinShareForm" + postId;
-                document.getElementById(formId).setAttribute("action", "/shareLinkedin/" + postId);
-            {% else %}
-                formId = "linkedinShareForm" + postId;
-                document.getElementById(formId).setAttribute("action", "/linkedinAuth");
-            {% endif %}
-        } else if (buttonID.includes("deletePostButton")) {
-            formId = "deletePostForm" + postId;
-            document.getElementById(formId).setAttribute("action", "/deletePost/" + postId);
-        }
+              if (buttonID.includes("linkedinShareButton")) {
+                  {% if linkedin_token %}
+                      formId = "linkedinShareForm" + postId;
+                      document.getElementById(formId).setAttribute("action", "/shareLinkedin/" + postId);
+                  {% else %}
+                      formId = "linkedinShareForm" + postId;
+                      document.getElementById(formId).setAttribute("action", "/linkedinAuth");
+                  {% endif %}
+              } else if (buttonID.includes("deletePostButton")) {
+                  formId = "deletePostForm" + postId;
+                  document.getElementById(formId).setAttribute("action", "/deletePost/" + postId);
+              }
 
-        document.getElementById(formId).submit();
-    });
-});
-
-</script>
+              document.getElementById(formId).submit();
+          });
+      });
+    </script>
   </body>
 </html>

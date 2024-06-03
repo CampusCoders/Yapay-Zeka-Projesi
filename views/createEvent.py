@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template, Blueprint, url_for, redirect, session, flash
 from api_ChatGPT import interface
 from views.loginorsignup import db, auth2, auth
+from LinkedinAPI.linkedin_post_create import format_linkedin_content
 from datetime import datetime
 
 create_event = Blueprint('create_event', import_name=__name__, template_folder='templates')
@@ -70,7 +71,9 @@ def create_event_from_API():
             'user_id': user_id
         }
 
-        db.child('Events').push(post_data)
+        new_event_ref = db.child('Events').push(post_data)
+        new_event_id = new_event_ref['name']
+        session['new_event_id'] = new_event_id
 
         return redirect(url_for('create_event.event_created',scrollPosition=scroll_position))
 
@@ -81,8 +84,14 @@ def event_created():
     if 'user_id' in session:
         user_id = session['user_id']
         user_data = db.child('Users').child(user_id).get().val()
+        linkedin_token = user_data.get('linkedin_access_token')
+        new_event_id=session['new_event_id']
         post_content = session['post_content']
-        return render_template('post.html', post_content=post_content, user=user_data,scroll_position=scroll_position)
+        formatted_post_content = format_linkedin_content(post_content)
+        if linkedin_token:
+            return render_template('post.html', post_content=formatted_post_content, user=user_data, scroll_position=scroll_position, linkedin_token=linkedin_token, event_id=new_event_id)
+        else:
+            return render_template('post.html', post_content=post_content, user=user_data, scroll_position=scroll_position, event_id=new_event_id)
     else:
         return redirect(url_for('login_or_signup.login_or_signup_home'))
     

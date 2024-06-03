@@ -7,44 +7,122 @@
     <title>Oluşturulan Post</title>
     <!-- Bootstrap CSS -->
     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+      media="screen" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css') }}"
+      media="screen" />
+    <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet" />
     <style>
-    body {
-      font-family: 'Roboto', sans-serif;
-      background-color: #f8f9fa;
-    }
-    .container {
-      margin-top: 50px;
-    }
-    .post-content {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-    }
-    .button-container {
-      text-align: center;
-      margin-top: 20px;
-    }
-  </style>
+      body {
+        font-family: "Roboto", sans-serif;
+        background-color: #f8f9fa;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .post-content {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+      }
+      .button-container {
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
+    <header
+      class="u-align-center-xs u-clearfix u-header u-clearfix u-sheet u-sheet-1"
+      id="sec-75b6">
+      <nav
+        style="background-color: #2c3e50"
+        class="navbar navbar-expand-lg navbar-dark">
+        <a href="/index">
+          <img
+            style="width: 263px; height: 40px; margin: 10px auto 0 0"
+            class="u-image u-image-contain u-image-default u-image-1"
+            src="./static/images/namelogo.png"
+            alt
+            data-image-width="757"
+            data-image-height="114" />
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                href="/dashboard">{{ user.name }} {{ user.surname }}</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                href="/myPosts"
+                type="submit">Postlarım</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                style="color: rgb(185, 36, 36) !important"
+                href="/logout"
+                type="submit">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
     <div class="container">
       <div class="post-content">
         <h1 class="text-center">Oluşturulan Post</h1>
-        <div>
-          {{ post_content | safe }}
-        </div>
+        <div>{{ post_content | safe }}</div>
+        <button
+          type="button"
+          class="btn btn-primary mt-2"
+          id="linkedinShareButton{{ event_id }}"
+          data-postid="{{ event_id }}">
+          <img
+            src="{{ url_for('static', filename='images/share-on-linkedin.png') }}"
+            alt="LinkedIn"
+            style="width: auto; height: auto" />
+        </button>
+        <form
+          id="linkedinShareForm{{ event_id }}"
+          action="/shareLinkedin/{{ event_id }}"
+          method="POST"
+          style="display: none"></form>
+        <button
+          type="button"
+          class="btn btn-danger mt-2"
+          id="deletePostButton{{ event_id }}"
+          data-postid="{{ event_id }}">
+          Postu sil
+        </button>
+        <form
+          id="deletePostForm{{ event_id }}"
+          action="/deletePost/{{ event_id }}"
+          method="POST"
+          style="display: none"></form>
       </div>
+
       <div class="button-container">
         <form action="/createEventFromIndex" method="post">
-          <button type="submit" class="btn btn-primary"
-            name="create_event_button2">Yeniden Oluştur</button>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            name="create_event_button2">
+            Yeniden Oluştur
+          </button>
         </form>
         <li class="list-group-item">Günlük Hak: {{ user.daily_rights }}</li>
         <form action="{{ url_for('index') }}" method="get" class="mt-2">
@@ -52,8 +130,46 @@
         </form>
       </div>
     </div>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
+
+    <!-- Pop-up Modal -->
+    <div
+      class="modal fade"
+      id="confirmationModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="confirmationModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmationModalLabel">UYARI!</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="confirmationMessage">
+            <!-- Confirmation message will be inserted here dynamically -->
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal">
+              Hayır
+            </button>
+            <button type="button" class="btn btn-primary" id="confirmButton">
+              Evet
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
     <div class="alert alert-info mt-3">
       <ul>
         {% for message in messages %}
@@ -61,8 +177,7 @@
         {% endfor %}
       </ul>
     </div>
-    {% endif %}
-    {% endwith %}
+    {% endif %} {% endwith %}
 
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -70,5 +185,58 @@
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script
       src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+    
+        document.querySelectorAll("[id^=linkedinShareButton], [id^=deletePostButton]").forEach((button) => {
+          button.addEventListener("click", function (event) {
+            event.stopPropagation();
+            var postId = this.getAttribute("data-postid");
+            var buttonID = this.getAttribute("id");
+            var confirmationMessage;
+
+            {% if linkedin_token %}
+            if (buttonID.includes("linkedinShareButton")) {
+              confirmationMessage = "Seçilen gönderiyi paylaşmak istiyor musunuz?";
+            } else if (buttonID.includes("deletePostButton")) {
+              confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
+            }
+            {% else %}
+            if (buttonID.includes("linkedinShareButton")) {
+              confirmationMessage = "Linkedin hesabınız bağlı değil bağlamak için 'Evet' butonuna basın.";
+            } else if (buttonID.includes("deletePostButton")) {
+              confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
+            }
+            {% endif %}
+
+            $("#confirmationModal").modal("show");
+            $("#confirmationMessage").text(confirmationMessage);
+            $("#confirmButton").attr("data-postid", postId);
+            $("#confirmButton").attr("data-button-id", buttonID);
+          });
+        });
+
+        document.getElementById("confirmButton").addEventListener("click", function () {
+          var postId = this.getAttribute("data-postid");
+          var buttonID = this.getAttribute("data-button-id");
+          var formId;
+
+          if (buttonID.includes("linkedinShareButton")) {
+            {% if linkedin_token %}
+            formId = "linkedinShareForm" + postId;
+            document.getElementById(formId).setAttribute("action", "/shareLinkedin/" + postId);
+            {% else %}
+            formId = "linkedinShareForm" + postId;
+            document.getElementById(formId).setAttribute("action", "/linkedinAuth");
+            {% endif %}
+          } else if (buttonID.includes("deletePostButton")) {
+            formId = "deletePostForm" + postId;
+            document.getElementById(formId).setAttribute("action", "/deletePost/" + postId);
+          }
+
+          document.getElementById(formId).submit();
+        });
+      });
+    </script>
   </body>
 </html>

@@ -7,43 +7,64 @@
     <title>User Dashboard</title>
     <!-- Bootstrap CSS -->
     <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+      media="screen" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/login.css') }}"
+      media="screen" />
+    <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet" />
-    <link rel="stylesheet"
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/dashboard.css') }}"
       media="screen" />
-    <link rel="stylesheet"
+    <link
+      rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
   </head>
 
   <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <a class="navbar-brand" href="#">Dashboard</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/myPosts">Postlarım</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link">{{ user.name }} {{ user.surname }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-light ml-2" href="/logout"
-              type="submit">Logout</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <header
+      class="u-align-center-xs u-clearfix u-header u-clearfix u-sheet u-sheet-1"
+      id="sec-75b6">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="/index">
+          <img
+            style="width: 263px; height: 40px; margin: 10px auto 0 0"
+            class="u-image u-image-contain u-image-default u-image-1"
+            src="./static/images/namelogo.png"
+            alt
+            data-image-width="757"
+            data-image-height="114" />
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                href="/dashboard">{{ user.name }} {{ user.surname }}</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                href="/myPosts"
+                type="submit">Postlarım</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
+                style="color: rgb(185, 36, 36) !important"
+                href="/logout"
+                type="submit">Logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
 
     <!-- Main Container -->
     <div class="container mt-4">
@@ -65,15 +86,25 @@
         <form action="/changePassword" method="post" class="form-group">
           <label for="new_password">Enter New Password:</label>
           <div class="password-container">
-            <input type="password" id="old_password" name="old_password"
-              class="form-control" placeholder="Current Password" required />
+            <input
+              type="password"
+              id="old_password"
+              name="old_password"
+              class="form-control"
+              placeholder="Current Password"
+              required />
             <span class="toggle-password1">
               <i class="fas eyeIcon1 fa-eye"></i>
             </span>
           </div>
           <div class="password-container mt-2">
-            <input type="password" id="new_password" name="new_password"
-              class="form-control" placeholder="New Password" required />
+            <input
+              type="password"
+              id="new_password"
+              name="new_password"
+              class="form-control"
+              placeholder="New Password"
+              required />
             <span class="toggle-password2">
               <i class="fas eyeIcon2 fa-eye"></i>
             </span>
@@ -87,8 +118,13 @@
       <div class="form-container mt-4">
         <form action="/changeEmail" method="post" class="form-group">
           <label for="new_email">Enter New Email:</label>
-          <input type="email" id="new_email" name="new_email"
-            class="form-control" placeholder="New Email" required />
+          <input
+            type="email"
+            id="new_email"
+            name="new_email"
+            class="form-control"
+            placeholder="New Email"
+            required />
           <button type="submit" class="btn btn-primary mt-2">
             Change Email
           </button>
@@ -99,27 +135,44 @@
         <button type="button" class="btn btn-primary mt-2" id="linkedinButton">
           <img
             src="{{ url_for('static', filename='images/signin-with-linkedin-button.png') }}"
-            alt="LinkedIn" style="width: auto; height: auto" />
+            alt="LinkedIn"
+            style="width: auto; height: auto" />
         </button>
-        <form id="linkedinForm" action="/linkedinAuth" method="POST"
+        <form
+          id="linkedinForm"
+          action="/linkedinAuth"
+          method="POST"
           style="display: none"></form>
 
-        <button type="button" class="btn btn-danger mt-2"
+        <button
+          type="button"
+          class="btn btn-danger mt-2"
           id="deleteAccountButton">
           Hesabı sil
         </button>
-        <form id="deleteAccountForm" action="/deleteUser" method="POST"
+        <form
+          id="deleteAccountForm"
+          action="/deleteUser"
+          method="POST"
           style="display: none"></form>
       </div>
 
       <!-- Pop-up Modal -->
-      <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
-        aria-labelledby="confirmationModalLabel" aria-hidden="true">
+      <div
+        class="modal fade"
+        id="confirmationModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="confirmationModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="confirmationModalLabel">UYARI!</h5>
-              <button type="button" class="close" data-dismiss="modal"
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
                 aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -134,8 +187,7 @@
         </div>
       </div>
 
-      {% with messages = get_flashed_messages() %}
-      {% if messages %}
+      {% with messages = get_flashed_messages() %} {% if messages %}
       <div class="alert alert-info mt-3">
         <ul>
           {% for message in messages %}
@@ -143,8 +195,7 @@
           {% endfor %}
         </ul>
       </div>
-      {% endif %}
-      {% endwith %}
+      {% endif %} {% endwith %}
     </div>
 
     <!-- JavaScript -->
@@ -156,61 +207,61 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>
-    document.getElementById("linkedinButton").addEventListener("click", function () {
-      $("#confirmationModal").modal("show");
+      document.getElementById("linkedinButton").addEventListener("click", function () {
+        $("#confirmationModal").modal("show");
 
-      var modalBody = document.querySelector("#confirmationModal .modal-body");
-      var modalFooter = document.querySelector("#confirmationModal .modal-footer");
+        var modalBody = document.querySelector("#confirmationModal .modal-body");
+        var modalFooter = document.querySelector("#confirmationModal .modal-footer");
 
-      {% if linkedin_token %}
-        modalBody.textContent = "Hesabınız zaten bağlı.";
-        modalFooter.innerHTML = '';
-      {% else %}
-        modalBody.textContent = "LinkedIn hesabınızı bağlamak istiyorsunuz, onaylıyor musunuz?";
-        modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button><button type="button" class="btn btn-primary" id="confirmButton" data-button-id="linkedinButton">Evet</button>';
-      {% endif %}
-    });
+        {% if linkedin_token %}
+          modalBody.textContent = "Hesabınız zaten bağlı.";
+          modalFooter.innerHTML = '';
+        {% else %}
+          modalBody.textContent = "LinkedIn hesabınızı bağlamak istiyorsunuz, onaylıyor musunuz?";
+          modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button><button type="button" class="btn btn-primary" id="confirmButton" data-button-id="linkedinButton">Evet</button>';
+        {% endif %}
+      });
 
-    document.getElementById("deleteAccountButton").addEventListener("click", function () {
-      $("#confirmationModal").modal("show");
+      document.getElementById("deleteAccountButton").addEventListener("click", function () {
+        $("#confirmationModal").modal("show");
 
-      var modalBody = document.querySelector("#confirmationModal .modal-body");
-      var modalFooter = document.querySelector("#confirmationModal .modal-footer");
+        var modalBody = document.querySelector("#confirmationModal .modal-body");
+        var modalFooter = document.querySelector("#confirmationModal .modal-footer");
 
-      modalBody.textContent = "Hesabınızı silmek üzeresiniz, onaylıyor musunuz?";
-      modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button><button type="button" class="btn btn-primary" id="confirmButton" data-button-id="deleteAccountButton">Evet</button>';
-    });
+        modalBody.textContent = "Hesabınızı silmek üzeresiniz, onaylıyor musunuz?";
+        modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button><button type="button" class="btn btn-primary" id="confirmButton" data-button-id="deleteAccountButton">Evet</button>';
+      });
 
-    document.addEventListener("click", function (event) {
-      if (event.target && event.target.id === "confirmButton") {
-        var buttonId = event.target.getAttribute("data-button-id");
-        if (buttonId === "linkedinButton") {
-          document.getElementById("linkedinForm").submit();
-        } else if (buttonId === "deleteAccountButton") {
-          document.getElementById("deleteAccountForm").submit();
+      document.addEventListener("click", function (event) {
+        if (event.target && event.target.id === "confirmButton") {
+          var buttonId = event.target.getAttribute("data-button-id");
+          if (buttonId === "linkedinButton") {
+            document.getElementById("linkedinForm").submit();
+          } else if (buttonId === "deleteAccountButton") {
+            document.getElementById("deleteAccountForm").submit();
+          }
+          $("#confirmationModal").modal("hide");
         }
-        $("#confirmationModal").modal("hide");
-      }
-    });
+      });
 
-    const togglePassword1 = document.querySelector(".toggle-password1");
-    const togglePassword2 = document.querySelector(".toggle-password2");
-    const passwordInput1 = document.getElementById("old_password");
-    const passwordInput2 = document.getElementById("new_password");
+      const togglePassword1 = document.querySelector(".toggle-password1");
+      const togglePassword2 = document.querySelector(".toggle-password2");
+      const passwordInput1 = document.getElementById("old_password");
+      const passwordInput2 = document.getElementById("new_password");
 
-    togglePassword1.addEventListener("click", function () {
-      const type = passwordInput1.getAttribute("type") === "password" ? "text" : "password";
-      passwordInput1.setAttribute("type", type);
-      this.classList.toggle("fa-eye");
-      this.classList.toggle("fa-eye-slash");
-    });
+      togglePassword1.addEventListener("click", function () {
+        const type = passwordInput1.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput1.setAttribute("type", type);
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+      });
 
-    togglePassword2.addEventListener("click", function () {
-      const type = passwordInput2.getAttribute("type") === "password" ? "text" : "password";
-      passwordInput2.setAttribute("type", type);
-      this.classList.toggle("fa-eye");
-      this.classList.toggle("fa-eye-slash");
-    });
-  </script>
+      togglePassword2.addEventListener("click", function () {
+        const type = passwordInput2.getAttribute("type") === "password" ? "text" : "password";
+        passwordInput2.setAttribute("type", type);
+        this.classList.toggle("fa-eye");
+        this.classList.toggle("fa-eye-slash");
+      });
+    </script>
   </body>
 </html>

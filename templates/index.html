@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="utf-8">
   <meta name="description" content="">
-  <title>Logged</title>
+  <title>Home Page</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" media="screen">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/logged.css') }}" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}" media="screen">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
   <link id="u-theme-google-font"
     href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" />
@@ -25,14 +25,13 @@
 <body data-path-to-root="./" data-include-products="false" class="u-body u-overlap u-overlap-transparent u-xl-mode" data-lang="tr">
   <header class="u-align-center-xs u-clearfix u-header u-clearfix u-sheet u-sheet-1" id="sec-75b6">
     <nav class="navbar navbar-expand-lg navbar-dark">
-      <img class="u-image u-image-contain u-image-default u-image-1" src="./static/images/namelogo.png" alt="" data-image-width="757" data-image-height="114">
+      <a href="/index">
+        <img class="u-image u-image-contain u-image-default u-image-1" src="./static/images/namelogo.png" alt="" data-image-width="757" data-image-height="114">
+      </a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link u-border-2 u-button-style u-nav-link u-radius u-text-grey-10">{{ user.name }} {{ user.surname }}</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10" href="/dashboard" type="submit">Bilgilerim</a>
+            <a class="nav-link u-border-2 u-button-style u-nav-link u-radius u-text-grey-10" href="/dashboard">{{ user.name }} {{ user.surname }}</a>
           </li>
           <li class="nav-item">
             <a class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10" href="/myPosts" type="submit">Postlarım</a>

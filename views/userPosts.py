@@ -13,11 +13,11 @@ def my_posts():
 
     if user_posts:
         if linkedin_token is None:
-            return render_template('userposts.html', user_posts=user_posts)
+            return render_template('userposts.html', user_posts=user_posts, user=user_data)
         else:
-            return render_template('userposts.html', user_posts=user_posts, linkedin_token=linkedin_token)
+            return render_template('userposts.html', user_posts=user_posts, linkedin_token=linkedin_token, user=user_data)
     else:
-        return render_template('userposts.html', user_posts=None)
+        return render_template('userposts.html', user_posts=None, user=user_data)
     
 @user_posts.route('/deletePost/<post_id>', methods=['POST'])
 def delete_post(post_id):
@@ -47,7 +47,4 @@ def sharePost(post_id):
         print("Post Shared:", share_result) 
     return redirect(url_for('user_posts.my_posts'))
 
-@user_posts.route('/getPostDetails/<post_id>', methods=['GET'])
-def get_post_details(post_id):
-    user_post = db.child('Events').child(post_id).get().val()
-    return jsonify(user_post)
+

@@ -17,7 +17,7 @@ temperature = 1
 max_tokens = 512
 topic = ""
 
-system_message = prompts.system_messages[3]
+system_message = prompts.system_messages[2]
 
 def get_post(event_name, event_topic, event_purpose, target_audience, event_platform,
              participants, hosts, sponsors, social_media_tags, date_time, event_details, event_link):
