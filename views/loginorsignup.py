@@ -69,13 +69,12 @@ def register():
         user_id = user['localId']
 
         registration_date = datetime.now().strftime("%b %d, %Y at %H:%M:%S UTC+3")
-        sub_types = ['Free', 'Basic', 'Advanced']
+        sub_types = ['Free', 'Advanced']
 
         sub_types_descriptions = ['Free paket sadece etkinlik yazısı oluşturur.',
-                                  'Basic paket etkinlik yazısı ve görsel oluşturma içerir.',
                                   'Advanced paket etkinlik yazısı, görsel oluşturma ve Linkedin API entegrasyonu içerir.']
         
-        sub_daily_rights = ['5','15','30']
+        sub_daily_rights = ['5','30']
  
         user_data = {
             'name': name,
@@ -84,7 +83,7 @@ def register():
             'password': password,
             'created_at': registration_date,
             'sub_type': sub_types[0],
-            'daily_rights': 5,
+            'daily_rights': sub_daily_rights[0],
             'expire_date': "none"
         }
 

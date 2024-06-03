@@ -4,6 +4,7 @@ from views.createEvent import create_event
 from views.dashboard import dashboard
 from views.userPosts import user_posts
 from views.linkedinToken import linkedinToken
+from views.payment import payment
 import secrets
 
 app = Flask(__name__)
@@ -18,6 +19,8 @@ app.register_blueprint(create_event)
 app.register_blueprint(user_posts)
 
 app.register_blueprint(linkedinToken)
+
+app.register_blueprint(payment)
 
 @app.route('/')
 def index():
