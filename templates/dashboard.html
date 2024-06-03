@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -67,16 +66,14 @@
           <label for="new_password">Enter New Password:</label>
           <div class="password-container">
             <input type="password" id="old_password" name="old_password"
-              class="form-control"
-              placeholder="Current Password" required />
+              class="form-control" placeholder="Current Password" required />
             <span class="toggle-password1">
               <i class="fas eyeIcon1 fa-eye"></i>
             </span>
           </div>
           <div class="password-container mt-2">
             <input type="password" id="new_password" name="new_password"
-              class="form-control" placeholder="New Password"
-              required />
+              class="form-control" placeholder="New Password" required />
             <span class="toggle-password2">
               <i class="fas eyeIcon2 fa-eye"></i>
             </span>
@@ -99,17 +96,14 @@
       </div>
 
       <div class="center-buttons mt-4">
-        {% if linkedin_token %}
-        <p style="color: green; margin-top: 20px; margin-right: 20px;">Your
-          LinkedIn account is connected.</p>
-        {% else %}
         <button type="button" class="btn btn-primary mt-2" id="linkedinButton">
-          <img src="static/images/signin-with-linkedin-button.png"
+          <img
+            src="{{ url_for('static', filename='images/signin-with-linkedin-button.png') }}"
             alt="LinkedIn" style="width: auto; height: auto" />
         </button>
         <form id="linkedinForm" action="/linkedinAuth" method="POST"
           style="display: none"></form>
-        {% endif %}
+
         <button type="button" class="btn btn-danger mt-2"
           id="deleteAccountButton">
           Hesabı sil
@@ -120,8 +114,7 @@
 
       <!-- Pop-up Modal -->
       <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
-        aria-labelledby="confirmationModalLabel"
-        aria-hidden="true">
+        aria-labelledby="confirmationModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -132,21 +125,17 @@
               </button>
             </div>
             <div class="modal-body">
+              <!-- Modal body content dynamically inserted here -->
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary"
-                data-dismiss="modal">
-                Hayır
-              </button>
-              <button type="button" class="btn btn-primary" id="confirmButton">
-                Evet
-              </button>
+              <!-- Modal footer content dynamically inserted here -->
             </div>
           </div>
         </div>
       </div>
 
-      {% with messages = get_flashed_messages() %} {% if messages %}
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
       <div class="alert alert-info mt-3">
         <ul>
           {% for message in messages %}
@@ -154,10 +143,11 @@
           {% endfor %}
         </ul>
       </div>
-      {% endif %} {% endwith %}
+      {% endif %}
+      {% endwith %}
     </div>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
@@ -166,37 +156,42 @@
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script>
-    document
-      .getElementById("linkedinButton")
-      .addEventListener("click", function () {
-        $("#confirmationModal").modal("show");
-        $("#confirmButton").attr("data-button-id", "linkedinButton");
-        $("#confirmationModal .modal-body").text(
-          "LinkedIn hesabınızı bağlamak istiyorsunuz, onaylıyor musunuz?"
-        );
-      });
+    document.getElementById("linkedinButton").addEventListener("click", function () {
+      $("#confirmationModal").modal("show");
 
-    document
-      .getElementById("deleteAccountButton")
-      .addEventListener("click", function () {
-        $("#confirmationModal").modal("show");
-        $("#confirmButton").attr("data-button-id", "deleteButton");
-        $("#confirmationModal .modal-body").text(
-          "Hesabınızı silmek üzeresiniz, onaylıyor musunuz?"
-        );
-      });
+      var modalBody = document.querySelector("#confirmationModal .modal-body");
+      var modalFooter = document.querySelector("#confirmationModal .modal-footer");
 
-    document
-      .getElementById("confirmButton")
-      .addEventListener("click", function () {
-        var buttonId = $(this).attr("data-button-id");
+      {% if linkedin_token %}
+        modalBody.textContent = "Hesabınız zaten bağlı.";
+        modalFooter.innerHTML = '';
+      {% else %}
+        modalBody.textContent = "LinkedIn hesabınızı bağlamak istiyorsunuz, onaylıyor musunuz?";
+        modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button><button type="button" class="btn btn-primary" id="confirmButton" data-button-id="linkedinButton">Evet</button>';
+      {% endif %}
+    });
+
+    document.getElementById("deleteAccountButton").addEventListener("click", function () {
+      $("#confirmationModal").modal("show");
+
+      var modalBody = document.querySelector("#confirmationModal .modal-body");
+      var modalFooter = document.querySelector("#confirmationModal .modal-footer");
+
+      modalBody.textContent = "Hesabınızı silmek üzeresiniz, onaylıyor musunuz?";
+      modalFooter.innerHTML = '<button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button><button type="button" class="btn btn-primary" id="confirmButton" data-button-id="deleteAccountButton">Evet</button>';
+    });
+
+    document.addEventListener("click", function (event) {
+      if (event.target && event.target.id === "confirmButton") {
+        var buttonId = event.target.getAttribute("data-button-id");
         if (buttonId === "linkedinButton") {
           document.getElementById("linkedinForm").submit();
-        } else if (buttonId === "deleteButton") {
+        } else if (buttonId === "deleteAccountButton") {
           document.getElementById("deleteAccountForm").submit();
         }
         $("#confirmationModal").modal("hide");
-      });
+      }
+    });
 
     const togglePassword1 = document.querySelector(".toggle-password1");
     const togglePassword2 = document.querySelector(".toggle-password2");
@@ -204,25 +199,18 @@
     const passwordInput2 = document.getElementById("new_password");
 
     togglePassword1.addEventListener("click", function () {
-      const type =
-        passwordInput1.getAttribute("type") === "password"
-          ? "text"
-          : "password";
+      const type = passwordInput1.getAttribute("type") === "password" ? "text" : "password";
       passwordInput1.setAttribute("type", type);
-      document.querySelector(".eyeIcon1").classList.toggle("fa-eye-slash");
-      document.querySelector(".eyeIcon1").classList.toggle("fa-eye");
+      this.classList.toggle("fa-eye");
+      this.classList.toggle("fa-eye-slash");
     });
 
     togglePassword2.addEventListener("click", function () {
-      const type =
-        passwordInput2.getAttribute("type") === "password"
-          ? "text"
-          : "password";
+      const type = passwordInput2.getAttribute("type") === "password" ? "text" : "password";
       passwordInput2.setAttribute("type", type);
-      document.querySelector(".eyeIcon2").classList.toggle("fa-eye-slash");
-      document.querySelector(".eyeIcon2").classList.toggle("fa-eye");
+      this.classList.toggle("fa-eye");
+      this.classList.toggle("fa-eye-slash");
     });
   </script>
   </body>
-
 </html>

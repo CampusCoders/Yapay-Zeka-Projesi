@@ -1,202 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Posts</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet">
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+      media="screen">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My Posts</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" media="screen" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-  <style>
-    .post-list {
-      max-height: 80vh;
-      overflow-y: auto;
-      border-right: 1px solid #ccc;
-    }
-
-    .post-item {
-      cursor: pointer;
-      padding: 15px;
-      border-bottom: 1px solid #ccc;
-    }
-
-    .post-item:hover {
-      background-color: #f1f1f1;
-    }
-
-    .post-details {
-      padding: 20px;
-    }
-
-    .post-details .content {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .post-details .content p {
-      white-space: pre-wrap;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4 post-list">
-        <h2 class="text-center">My Posts</h2>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <div class="alert alert-info mt-3">
-          <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
-        {% endwith %}
-
-        {% if user_posts %}
-        <ul class="list-group">
-          {% for key, post in user_posts.items() %}
-          <li class="list-group-item post-item" data-postid="{{ key }}">
-            <strong>Created at: {{ post.created_at }}</strong>
-          </li>
-          {% endfor %}
-        </ul>
-        {% else %}
-        <p>No posts found.</p>
-        {% endif %}
-      </div>
-      <div class="col-md-8 post-details">
-        <div id="postContent" class="content">
-          <p>Please select a post to view the details.</p>
-        </div>
-      </div>
+        .post.open .content {
+            display: block;
+        }
+    </style>
+  </head>
+  <body>
+    <h1>My Posts</h1>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-info mt-3">
+      <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
     </div>
-  </div>
+    {% endif %}
+    {% endwith %}
 
-  <!-- Pop-up Modal -->
-  <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="confirmationModalLabel">UYARI!</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+    {% if user_posts %}
+    <ul>
+      {% for key, post in user_posts.items() %}
+      <li class="post">
+        <p><strong>Created at: {{ post.created_at }} </strong></p>
+        <div class="content">
+          <p>{{ post.content | safe }}</p>
+          <button type="button" class="btn btn-primary mt-2"
+            id="linkedinShareButton{{ key }}"
+            data-postid="{{ key }}">
+            <img
+              src="{{ url_for('static', filename='images/share-on-linkedin.png') }}"
+              alt="LinkedIn" style="width: auto; height: auto" />
           </button>
+          <form id="linkedinShareForm{{ key }}"
+            action="/shareLinkedin/{{ key }}"
+            method="POST" style="display: none"></form>
+          <button type="button" class="btn btn-danger mt-2"
+            id="deletePostButton{{ key }}"
+            data-postid="{{ key }}">
+            Postu sil
+          </button>
+          <form id="deletePostForm{{ key }}" action="/deletePost/{{ key }}"
+            method="POST" style="display: none"></form>
         </div>
-        <div class="modal-body" id="confirmationMessage">
-          <!-- Confirmation message will be inserted here dynamically -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Hayır</button>
-          <button type="button" class="btn btn-primary" id="confirmButton">Evet</button>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p>No posts found.</p>
+    {% endif %}
+
+    <!-- Pop-up Modal -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog"
+      aria-labelledby="confirmationModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="confirmationModalLabel">UYARI!</h5>
+            <button type="button" class="close" data-dismiss="modal"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="confirmationMessage">
+            <!-- Confirmation message will be inserted here dynamically -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary"
+              data-dismiss="modal">Hayır</button>
+            <button type="button" class="btn btn-primary"
+              id="confirmButton">Evet</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- jQuery, Popper.js, Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <!-- Font Awesome -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-  <script>
+    <!-- jQuery, Popper.js, Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Font Awesome -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const posts = document.querySelectorAll(".post-item");
+    const posts = document.querySelectorAll(".post");
 
-      posts.forEach(function (post) {
+    posts.forEach(function (post) {
         post.addEventListener("click", function () {
-          const postId = this.getAttribute("data-postid");
-
-          // Fetch the post details
-          fetch(`/getPostDetails/${postId}`)
-            .then(response => response.json())
-            .then(data => {
-              const postContent = document.getElementById("postContent");
-              postContent.innerHTML = `
-                <p><strong>Created at: ${data.created_at}</strong></p>
-                <p>${data.content}</p>
-                ${data.linkedin_token ? `<button type="button" class="btn btn-primary mt-2 linkedinButton" id="linkedinButton${postId}" data-postid="${postId}">
-                  <img src="static/images/share-on-linkedin.png" alt="LinkedIn" style="width: auto; height: auto" />
-                </button>` : ""}
-                <button type="button" class="btn btn-danger mt-2 deletePostButton" id="deletePostButton${postId}" data-postid="${postId}">
-                  Postu sil
-                </button>
-              `;
-              addEventListeners(postId);
-            });
+            this.classList.toggle("open");
         });
-      });
-
-      function addEventListeners(postId) {
-        document
-          .querySelector(`#linkedinButton${postId}`)
-          ?.addEventListener("click", function (event) {
-            event.stopPropagation();
-            var postId = this.getAttribute("data-postid");
-            var buttonID = "linkedinButton";
-            var confirmationMessage = "LinkedIn'de paylaşmak istiyor musunuz?";
-
-            $("#confirmationModal").modal("show");
-            $("#confirmationMessage").text(confirmationMessage);
-            $("#confirmButton").attr("data-postid", postId);
-            $("#confirmButton").attr("data-button-id", buttonID);
-          });
-
-        document
-          .querySelector(`#deletePostButton${postId}`)
-          ?.addEventListener("click", function (event) {
-            event.stopPropagation();
-            var postId = this.getAttribute("data-postid");
-            var buttonID = "deletePostButton";
-            var confirmationMessage = "Postunuzu silmek üzeresiniz, onaylıyor musunuz?";
-
-            $("#confirmationModal").modal("show");
-            $("#confirmationMessage").text(confirmationMessage);
-            $("#confirmButton").attr("data-postid", postId);
-            $("#confirmButton").attr("data-button-id", buttonID);
-          });
-
-        document
-          .getElementById("confirmButton")
-          .addEventListener("click", function () {
-            var postId = this.getAttribute("data-postid");
-            var buttonID = this.getAttribute("data-button-id");
-            if (buttonID === "linkedinButton") {
-              fetch(`/shareLinkedin/${postId}`, {
-                method: "POST",
-              }).then((response) => {
-                if (response.ok) {
-                  console.log("Post successfully shared!");
-                  location.reload();
-                } else {
-                  console.error("Failed to share post!");
-                }
-              });
-            } else if (buttonID === "deletePostButton") {
-              fetch(`/deletePost/${postId}`, {
-                method: "POST",
-              }).then((response) => {
-                if (response.ok) {
-                  console.log("Post successfully deleted!");
-                  location.reload();
-                } else {
-                  console.error("Failed to delete post!");
-                }
-              });
-            }
-          });
-      }
     });
-  </script>
-</body>
 
+    document.querySelectorAll("[id^=linkedinShareButton], [id^=deletePostButton]").forEach((button) => {
+        button.addEventListener("click", function (event) {
+            event.stopPropagation();
+            var postId = this.getAttribute("data-postid");
+            var buttonID = this.getAttribute("id");
+            var confirmationMessage;
+
+            {% if linkedin_token %}
+                if (buttonID.includes("linkedinShareButton")) {
+                    confirmationMessage = "Seçilen gönderiyi paylaşmak istiyor musunuz?";
+                } else if (buttonID.includes("deletePostButton")) {
+                    confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
+                }
+            {% else %}
+                confirmationMessage = "LinkedIn hesabınız bağlı değil.";
+            {% endif %}
+
+            $("#confirmationModal").modal("show");
+            $("#confirmationMessage").text(confirmationMessage);
+            $("#confirmButton").attr("data-postid", postId);
+            $("#confirmButton").attr("data-button-id", buttonID);
+        });
+    });
+
+    document.getElementById("confirmButton").addEventListener("click", function () {
+        var postId = this.getAttribute("data-postid");
+        var buttonID = this.getAttribute("data-button-id");
+        var formId;
+
+        if (buttonID.includes("linkedinShareButton")) {
+            {% if linkedin_token %}
+                formId = "linkedinShareForm" + postId;
+                document.getElementById(formId).setAttribute("action", "/shareLinkedin/" + postId);
+            {% else %}
+                formId = "linkedinShareForm" + postId;
+                document.getElementById(formId).setAttribute("action", "/linkedinAuth");
+            {% endif %}
+        } else if (buttonID.includes("deletePostButton")) {
+            formId = "deletePostForm" + postId;
+            document.getElementById(formId).setAttribute("action", "/deletePost/" + postId);
+        }
+
+        document.getElementById(formId).submit();
+    });
+});
+
+</script>
+  </body>
 </html>
