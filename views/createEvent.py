@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, render_template, Blueprint, url_for, redirect, session, flash
-from api_ChatGPT import interface
+from api_Gemini import interface
 from views.loginorsignup import db, auth2, auth
 from LinkedinAPI.linkedin_post_create import format_linkedin_content
 from datetime import datetime

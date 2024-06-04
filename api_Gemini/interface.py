@@ -1,4 +1,4 @@
-from api_ChatGPT import prompts
+from api_Gemini import prompts
 import google.generativeai as genai
 import markdown2
 
