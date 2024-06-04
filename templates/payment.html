@@ -1,42 +1,34 @@
 <!DOCTYPE html>
 <html lang="tr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Kredi Kartı Formu</title>
-        <link rel="stylesheet"
-            href="{{ url_for('static', filename='css/payment.css') }}"
-            media="screen" />
-    </head>
-    <body>
-        <div class="container">
-            <div class="card" id="credit-card">
-                <div class="card-info">
-                    <div class="card-number" id="card-number">#### #### ####
-                        ####</div>
-                    <div class="card-name" id="card-name">İSİM SOYİSİM</div>
-                    <div class="card-expiry" id="card-expiry">MM/YY</div>
-                    <div class="card-cvv" id="card-cvv">CVV</div>
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kredi Kartı Formu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/payment.css') }}" media="screen" />
+</head>
+<body>
+    <div class="container">
+        <div class="card" id="credit-card">
+            <div class="card-info">
+                <div class="card-number" id="card-number">#### #### #### ####</div>
+                <div class="card-name" id="card-name">İSİM SOYİSİM</div>
+                <div class="card-expiry" id="card-expiry">MM/YY</div>
+                <div class="card-cvv" id="card-cvv">CVV</div>
             </div>
-            <form id="card-form">
-                <label for="number">Kart Numarası:</label>
-                <input type="tel" id="number" maxlength="16"
-                    placeholder="#### #### #### ####"
-                    oninput="validateNumber(this)" required>
-                <label for="name">İsim Soyisim:</label>
-                <input type="text" id="name" placeholder="İsim Soyisim"
-                    required>
-                <label for="expiry">Son Kullanma Tarihi:</label>
-                <input type="tel" id="expiry" maxlength="4" placeholder="MM/YY"
-                    oninput="validateExpiry(this)" required>
-                <label for="cvv">CVV:</label>
-                <input type="tel" id="cvv" maxlength="3" placeholder="CVV"
-                    oninput="validateCVV(this)" required>
-                <button type="submit">Formu Gönder</button>
-            </form>
         </div>
-        <script
-            src="{{ url_for('static', filename='js/payment.js') }}"></script>
-    </body>
+        <form id="card-form">
+            <label for="number">Kart Numarası:</label>
+            <input type="tel" id="number" maxlength="16" placeholder="#### #### #### ####" oninput="validateNumber(this)" required>
+            <label for="name">İsim Soyisim:</label>
+            <input type="text" id="name" placeholder="İsim Soyisim" required>
+            <label for="expiry">Son Kullanma Tarihi:</label>
+            <input type="tel" id="expiry" maxlength="5" placeholder="MM/YY" oninput="validateExpiry(this)" required>
+            <label for="cvv">CVV:</label>
+            <input type="tel" id="cvv" maxlength="3" placeholder="CVV" oninput="validateCVV(this)" required>
+            <button type="submit">ÖDEME YAP</button>
+            <a href="/index" class="cancel-link">İptal</a>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='js/payment.js') }}"></script>
+</body>
 </html>

@@ -8,32 +8,49 @@
     <!-- Bootstrap CSS -->
     <link
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-      rel="stylesheet" />
+      rel="stylesheet"
+    />
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/dashboard.css') }}"
-      media="screen" />
+      media="screen"
+    />
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
     <style>
       .content {
-        display: none;
         background: white;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
 
-      .post.open .content {
-        display: block;
+      .container {
+        display: flex;
+      }
+
+      .posts-list {
+        flex: 1;
+        margin-right: 20px;
+        max-width: 300px;
+      }
+
+      .post-details {
+        flex: 2;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
       }
     </style>
   </head>
   <body>
     <header
       class="u-align-center-xs u-clearfix u-header u-clearfix u-sheet u-sheet-1"
-      id="sec-75b6">
+      id="sec-75b6"
+    >
       <nav class="navbar navbar-expand-lg navbar-dark">
         <a href="/index">
           <img
@@ -42,82 +59,72 @@
             src="./static/images/namelogo.png"
             alt
             data-image-width="757"
-            data-image-height="114" />
+            data-image-height="114"
+          />
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a
                 class="nav-link u-border-2 u-button-style u-nav-link u-radius u-text-grey-10"
-                href="/dashboard">{{ user.name }} {{ user.surname }}</a>
+                href="/dashboard"
+                >{{ user.name }} {{ user.surname }}</a
+              >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
                 href="/myPosts"
-                type="submit">Postlarım</a>
+                type="submit"
+                >Postlarım</a
+              >
             </li>
             <li class="nav-item">
               <a
                 class="nav-link u-border-2 u-border-hover-custom-color-2 u-button-style u-nav-link u-radius u-text-grey-10"
                 style="color: rgb(185, 36, 36) !important"
                 href="/logout"
-                type="submit">Logout</a>
+                type="submit"
+                >Logout</a
+              >
             </li>
           </ul>
         </div>
       </nav>
     </header>
-    <h1>My Posts</h1>
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <div class="alert alert-info mt-3">
-      <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %} {% endwith %} {% if user_posts %}
-    <ul>
-      {% for key, post in user_posts.items() %}
-      <li class="post">
-        <p><strong>Created at: {{ post.created_at }} </strong></p>
-        <div class="content">
-          <p>{{ post.content | safe }}</p>
-          <button
-            type="button"
-            class="btn btn-primary mt-2"
-            id="linkedinShareButton{{ key }}"
-            data-postid="{{ key }}">
-            <img
-              src="{{ url_for('static', filename='images/share-on-linkedin.png') }}"
-              alt="LinkedIn"
-              style="width: auto; height: auto" />
-          </button>
-          <form
-            id="linkedinShareForm{{ key }}"
-            action="/shareLinkedin/{{ key }}"
-            method="POST"
-            style="display: none"></form>
-          <button
-            type="button"
-            class="btn btn-danger mt-2"
-            id="deletePostButton{{ key }}"
-            data-postid="{{ key }}">
-            Postu sil
-          </button>
-          <form
-            id="deletePostForm{{ key }}"
-            action="/deletePost/{{ key }}"
-            method="POST"
-            style="display: none"></form>
+    <div class="container mt-4">
+      <div class="posts-list">
+        <h1>My Posts</h1>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="alert alert-info mt-3">
+          <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
         </div>
-      </li>
-      {% endfor %}
-    </ul>
-    {% else %}
-    <p>No posts found.</p>
-    {% endif %}
+        {% endif %}
+        {% endwith %}
+        {% if user_posts %}
+        <ul class="list-group">
+          {% for key, post in user_posts.items() %}
+          <li class="post list-group-item" data-postid="{{ key }}">
+            <p><strong>Created at: {{ post.created_at }}</strong></p>
+            <div class="content d-none">
+              <p>{{ post.content | safe }}</p>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No posts found.</p>
+        {% endif %}
+      </div>
+      <div class="post-details" id="postDetails">
+        <p>Select a post to view details.</p>
+      </div>
+    </div>
 
     <!-- Pop-up Modal -->
     <div
@@ -126,7 +133,8 @@
       tabindex="-1"
       role="dialog"
       aria-labelledby="confirmationModalLabel"
-      aria-hidden="true">
+      aria-hidden="true"
+    >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -135,7 +143,8 @@
               type="button"
               class="close"
               data-dismiss="modal"
-              aria-label="Close">
+              aria-label="Close"
+            >
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -146,7 +155,8 @@
             <button
               type="button"
               class="btn btn-secondary"
-              data-dismiss="modal">
+              data-dismiss="modal"
+            >
               Hayır
             </button>
             <button type="button" class="btn btn-primary" id="confirmButton">
@@ -160,69 +170,139 @@
     <!-- jQuery, Popper.js, Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"
+    ></script>
     <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    ></script>
     <!-- Font Awesome -->
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
+    ></script>
     <script>
-          document.addEventListener("DOMContentLoaded", function () {
-          const posts = document.querySelectorAll(".post");
+      document.addEventListener("DOMContentLoaded", function () {
+        const posts = document.querySelectorAll(".post");
+        const postDetails = document.getElementById("postDetails");
 
-          posts.forEach(function (post) {
-              post.addEventListener("click", function () {
-                  this.classList.toggle("open");
-              });
+        posts.forEach(function (post) {
+          post.addEventListener("click", function () {
+            const postId = this.getAttribute("data-postid");
+            fetchPostDetails(postId);
           });
+        });
 
-          document.querySelectorAll("[id^=linkedinShareButton], [id^=deletePostButton]").forEach((button) => {
-              button.addEventListener("click", function (event) {
-                  event.stopPropagation();
-                  var postId = this.getAttribute("data-postid");
-                  var buttonID = this.getAttribute("id");
-                  var confirmationMessage;
+        function fetchPostDetails(postId) {
+          const post = document.querySelector(`[data-postid="${postId}"]`);
+          const postContent = post.querySelector(".content").innerHTML;
+          console.log(postContent); // Logging to ensure content is being fetched
 
-                  {% if linkedin_token %}
-                      if (buttonID.includes("linkedinShareButton")) {
-                          confirmationMessage = "Seçilen gönderiyi paylaşmak istiyor musunuz?";
-                      } else if (buttonID.includes("deletePostButton")) {
-                          confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
-                      }
-                  {% else %}
-                      if (buttonID.includes("linkedinShareButton")) {
-                          confirmationMessage = "Linkedin hesabınız bağlı değil bağlamak için 'Evet' butonuna basın.";
-                      } else if (buttonID.includes("deletePostButton")) {
-                          confirmationMessage = "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
-                      }
-                  {% endif %}
+          postDetails.innerHTML = `
+            <div class="content">
+              ${postContent}
+              <button
+                type="button"
+                class="btn btn-primary mt-2"
+                id="linkedinShareButton${postId}"
+                data-postid="${postId}"
+              >
+                LinkedIn'de paylaş
+              </button>
+              <form
+                id="linkedinShareForm${postId}"
+                action="/shareLinkedin/${postId}"
+                method="POST"
+                style="display: none"
+              ></form>
+              <button
+                type="button"
+                class="btn btn-danger mt-2"
+                id="deletePostButton${postId}"
+                data-postid="${postId}"
+              >
+                Postu sil
+              </button>
+              <form
+                id="deletePostForm${postId}"
+                action="/deletePost/${postId}"
+                method="POST"
+                style="display: none"
+              ></form>
+            </div>
+          `;
 
-                  $("#confirmationModal").modal("show");
-                  $("#confirmationMessage").text(confirmationMessage);
-                  $("#confirmButton").attr("data-postid", postId);
-                  $("#confirmButton").attr("data-button-id", buttonID);
-              });
-          });
+          addEventListeners(postId);
+        }
 
-          document.getElementById("confirmButton").addEventListener("click", function () {
-              var postId = this.getAttribute("data-postid");
-              var buttonID = this.getAttribute("data-button-id");
-              var formId;
+        function addEventListeners(postId) {
+          document
+            .getElementById(`linkedinShareButton${postId}`)
+            .addEventListener("click", function (event) {
+              event.stopPropagation();
+              showConfirmationModal(postId, "linkedinShareButton");
+            });
 
-              if (buttonID.includes("linkedinShareButton")) {
-                  {% if linkedin_token %}
-                      formId = "linkedinShareForm" + postId;
-                      document.getElementById(formId).setAttribute("action", "/shareLinkedin/" + postId);
-                  {% else %}
-                      formId = "linkedinShareForm" + postId;
-                      document.getElementById(formId).setAttribute("action", "/linkedinAuth");
-                  {% endif %}
-              } else if (buttonID.includes("deletePostButton")) {
-                  formId = "deletePostForm" + postId;
-                  document.getElementById(formId).setAttribute("action", "/deletePost/" + postId);
-              }
+          document
+            .getElementById(`deletePostButton${postId}`)
+            .addEventListener("click", function (event) {
+              event.stopPropagation();
+              showConfirmationModal(postId, "deletePostButton");
+            });
+        }
 
-              document.getElementById(formId).submit();
+        function showConfirmationModal(postId, buttonID) {
+          var confirmationMessage;
+
+          {% if linkedin_token %}
+          if (buttonID.includes("linkedinShareButton")) {
+            confirmationMessage =
+              "Seçilen gönderiyi paylaşmak istiyor musunuz?";
+          } else if (buttonID.includes("deletePostButton")) {
+            confirmationMessage =
+              "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
+          }
+          {% else %}
+          if (buttonID.includes("linkedinShareButton")) {
+            confirmationMessage =
+              "Linkedin hesabınız bağlı değil bağlamak için 'Evet' butonuna basın.";
+          } else if (buttonID.includes("deletePostButton")) {
+            confirmationMessage =
+              "Seçilen postu silmek üzeresiniz, onaylıyor musunuz?";
+          }
+          {% endif %}
+
+          $("#confirmationModal").modal("show");
+          $("#confirmationMessage").text(confirmationMessage);
+          $("#confirmButton").attr("data-postid", postId);
+          $("#confirmButton").attr("data-button-id", buttonID);
+        }
+
+        document
+          .getElementById("confirmButton")
+          .addEventListener("click", function () {
+            var postId = this.getAttribute("data-postid");
+            var buttonID = this.getAttribute("data-button-id");
+            var formId;
+
+            if (buttonID.includes("linkedinShareButton")) {
+              {% if linkedin_token %}
+              formId = "linkedinShareForm" + postId;
+              document
+                .getElementById(formId)
+                .setAttribute("action", "/shareLinkedin/" + postId);
+              {% else %}
+              formId = "linkedinShareForm" + postId;
+              document
+                .getElementById(formId)
+                .setAttribute("action", "/linkedinAuth");
+              {% endif %}
+            } else if (buttonID.includes("deletePostButton")) {
+              formId = "deletePostForm" + postId;
+              document
+                .getElementById(formId)
+                .setAttribute("action", "/deletePost/" + postId);
+            }
+
+            document.getElementById(formId).submit();
           });
       });
     </script>

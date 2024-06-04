@@ -163,3 +163,21 @@ textarea:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0px 1000px #25262a inset !important;
   -webkit-text-fill-color: #d1d1d1 !important;
 }
+
+
+.password-container {
+  position: relative;
+}
+.password-container input {
+  padding-right: 30px;
+}
+.password-container .toggle-password-login,.toggle-password-sign1,.toggle-password-sign2 {
+  position: absolute;
+  right: 10px;
+  top: 70%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.eyeIconLogin,.eyeIconSign1,.eyeIconSign2 {
+  cursor: pointer;
+}

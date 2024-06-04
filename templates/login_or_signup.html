@@ -14,6 +14,9 @@
             media="screen">
         <link id="u-theme-google-font"
             href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i" />
+            <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
         <script type="application/ld+json">{
         "@context": "http://schema.org",
         "@type": "Organization",
@@ -57,15 +60,18 @@
                                 placeholder="Geçerli bir e-posta adresi girin"
                                 id="email-ae4f" name="login_email"
                                 class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
-                                required="required">
+                                required="required"/>
                         </div>
-                        <div class="u-form-group u-form-group-2">
+                        <div class="u-form-group u-form-group-2 password-container">
                             <label for="text-26c8" class="u-label">Şifre</label>
                             <input type="password" id="text-26c8"
                                 name="login_password"
-                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle login-pass"
                                 required="required"
-                                placeholder="Geçerli bir şifre girin">
+                                placeholder="Geçerli bir şifre girin"/>
+                            <span class="toggle-password-login">
+                                <i class="fas eyeIconLogin fa-eye"></i>
+                            </span>
                         </div>
                         {% if form_type == 'login' %}
                         {% with messages = get_flashed_messages() %}
@@ -126,21 +132,27 @@
                                 class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
                                 required="required">
                         </div>
-                        <div class="u-form-group u-form-group-8">
+                        <div class="u-form-group u-form-group-8 password-container">
                             <label for="text-26c8" class="u-label">Şifre</label>
                             <input type="password" id="text-26c8"
                                 name="signup_password_1"
-                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle"
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle sign-pass1"
                                 required="required"
                                 placeholder="Geçerli bir şifre girin">
+                            <span class="toggle-password-sign1">
+                                <i class="fas eyeIconSign1 fa-eye"></i>
+                            </span>
                         </div>
-                        <div class="u-form-group u-form-group-9">
+                        <div class="u-form-group u-form-group-9 password-container">
                             <label for="text-a22f" class="u-label">Şifre
                                 Tekrar</label>
                             <input type="password"
                                 placeholder="Geçerli şifreyi tekrar girin"
                                 id="text-a22f" name="signup_password_2"
-                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle">
+                                class="u-border-custom-color-2 u-custom-color-11 u-input u-input-rectangle sign-pass2">
+                            <span class="toggle-password-sign2">
+                                <i class="fas eyeIconSign2 fa-eye"></i>
+                            </span>
                         </div>
                         {% if form_type == 'signup' %}
                         {% with messages = get_flashed_messages() %}
@@ -198,6 +210,48 @@
                 showSignupForm();
             } else if (formType ==='login') {
                 showLoginForm();
+            }
+        });
+
+        const passwordInputLogin = document.querySelector(".login-pass");
+        const eyeIconLogin = document.querySelector(".eyeIconLogin");
+        const passwordInputSign1 = document.querySelector(".sign-pass1");
+        const eyeIconSign1 = document.querySelector(".eyeIconSign1");
+        const passwordInputSign2 = document.querySelector(".sign-pass2");
+        const eyeIconSign2 = document.querySelector(".eyeIconSign2");
+
+
+        eyeIconLogin.addEventListener("click", function () {
+            if(passwordInputLogin.getAttribute("type") === "password" ){
+                eyeIconLogin.classList.remove("fa-eye");
+                eyeIconLogin.classList.add("fa-eye-slash");
+                passwordInputLogin.setAttribute("type", "text");
+            } else{
+                eyeIconLogin.classList.remove("fa-eye-slash");
+                eyeIconLogin.classList.add("fa-eye");
+                passwordInputLogin.setAttribute("type", "password");
+            }
+        });
+        eyeIconSign1.addEventListener("click", function () {
+            if(passwordInputSign1.getAttribute("type") === "password" ){
+                eyeIconSign1.classList.remove("fa-eye");
+                eyeIconSign1.classList.add("fa-eye-slash");
+                passwordInputSign1.setAttribute("type", "text");
+            } else{
+                eyeIconSign1.classList.remove("fa-eye-slash");
+                eyeIconSign1.classList.add("fa-eye");
+                passwordInputSign1.setAttribute("type", "password");
+            }
+        });
+        eyeIconSign2.addEventListener("click", function () {
+            if(passwordInputSign2.getAttribute("type") === "password" ){
+                eyeIconSign2.classList.remove("fa-eye");
+                eyeIconSign2.classList.add("fa-eye-slash");
+                passwordInputSign2.setAttribute("type", "text");
+            } else{
+                eyeIconSign2.classList.remove("fa-eye-slash");
+                eyeIconSign2.classList.add("fa-eye");
+                passwordInputSign2.setAttribute("type", "password");
             }
         });
     </script>
