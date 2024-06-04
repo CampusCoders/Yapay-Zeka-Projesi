@@ -74,7 +74,7 @@ def register():
         sub_types_descriptions = ['Free paket sadece etkinlik yazısı oluşturur.',
                                   'Advanced paket etkinlik yazısı, görsel oluşturma ve Linkedin API entegrasyonu içerir.']
         
-        sub_daily_rights = ['5','30']
+        sub_daily_rights = [5,30]
  
         user_data = {
             'name': name,

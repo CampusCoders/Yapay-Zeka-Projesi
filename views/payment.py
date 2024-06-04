@@ -1,5 +1,4 @@
 from flask import request, redirect, render_template, Blueprint, session, url_for
-from LinkedinAPI.linkedin_token_utils import refresh_token, args, authorize, parse_redirect_uri
 from views.loginorsignup import db, auth2, auth
 from datetime import datetime, timedelta
 
@@ -18,7 +17,7 @@ def paymentSuccess():
     sub_types_descriptions = ['Free paket sadece etkinlik yazısı oluşturur.',
                                   'Advanced paket etkinlik yazısı, görsel oluşturma ve Linkedin API entegrasyonu içerir.']
         
-    sub_daily_rights = ['5','30']
+    sub_daily_rights = [5,30]
 
     # Mevcut tarihi al
     current_date = datetime.now()
