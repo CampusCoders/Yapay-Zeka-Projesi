@@ -88,6 +88,7 @@ def generate_prompt_full(event_name, event_topic, event_purpose, target_audience
 
     Yapmaman gerekenler:
     Sosyal medya gönderisi yazısına "Başlık" diyerek başlama.
+    Yıldız karakterini '*' sadece başlıklarda kullan.
 
     Şimdi aşağıdaki bilgilere göre sanat etkinlik gönderi yazısı oluştur:
             # Etkinlik Adı: {event_name}
