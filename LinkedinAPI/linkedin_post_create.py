@@ -2,17 +2,16 @@ import requests
 import json
 from LinkedinAPI.linkedin_token_utils import credentials, read_creds
 import re
-
-import re
+import markdown2
 
 def format_linkedin_content(html_content):
     # HTML etiketlerini LinkedIn'in desteklediği biçimlendirme ile değiştir
-    html_content = html_content.replace('<h2>', '**').replace('</h2>', '**\n')
-    html_content = html_content.replace('<h3>', '**').replace('</h3>', '**\n')
-    html_content = html_content.replace('<h4>', '**').replace('</h4>', '**\n')
+    html_content = html_content.replace('<h2>', '  ').replace('</h2>', '  \n')
+    html_content = html_content.replace('<h3>', '  ').replace('</h3>', '  \n')
+    html_content = html_content.replace('<h4>', '  ').replace('</h4>', '  \n')
     html_content = html_content.replace('<p>', '').replace('</p>', '\n')
-    html_content = html_content.replace('<strong>', '**').replace('</strong>', '**')
-    html_content = html_content.replace('<b>', '**').replace('</b>', '**')
+    html_content = html_content.replace('<strong>', '').replace('</strong>', '')
+    html_content = html_content.replace('<b>', '  ').replace('</b>', '  ')
     html_content = html_content.replace('<i>', '_').replace('</i>', '_')
     html_content = html_content.replace('<em>', '_').replace('</em>', '_')
     html_content = html_content.replace('<ul>', '').replace('</ul>', '')
@@ -26,6 +25,8 @@ def format_linkedin_content(html_content):
     clean_text = re.sub(' +', ' ', clean_text).strip()
     
     return clean_text
+
+
 
 def get_user_profile(access_token):
     url = 'https://api.linkedin.com/v2/userinfo'
@@ -51,19 +52,7 @@ def share_post(access_token, text_content, user_sub):
             "shareCommentary": {
                 "text": text_content
             },
-            "shareMediaCategory": "ARTICLE",
-            "media": [
-                {
-                    "status": "READY",
-                    "description": {
-                        "text": "Official LinkedIn Blog - Your source for insights and information about LinkedIn."
-                    },
-                    "originalUrl": "https://blog.linkedin.com/",
-                    "title": {
-                        "text": "Official LinkedIn Blog"
-                    }
-                }
-            ]
+            "shareMediaCategory": "NONE"
         }
     },
     "visibility": {

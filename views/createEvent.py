@@ -3,6 +3,7 @@ from api_ChatGPT import interface
 from views.loginorsignup import db, auth2, auth
 from LinkedinAPI.linkedin_post_create import format_linkedin_content
 from datetime import datetime
+import json
 
 create_event = Blueprint('create_event', import_name=__name__, template_folder='templates')
 
@@ -87,9 +88,9 @@ def event_created():
         linkedin_token = user_data.get('linkedin_access_token')
         new_event_id=session['new_event_id']
         post_content = session['post_content']
-        formatted_post_content = format_linkedin_content(post_content)
+        
         if linkedin_token:
-            return render_template('post.html', post_content=formatted_post_content, user=user_data, scroll_position=scroll_position, linkedin_token=linkedin_token, event_id=new_event_id)
+            return render_template('post.html', post_content=post_content, user=user_data, scroll_position=scroll_position, linkedin_token=linkedin_token, event_id=new_event_id)
         else:
             return render_template('post.html', post_content=post_content, user=user_data, scroll_position=scroll_position, event_id=new_event_id)
     else:
